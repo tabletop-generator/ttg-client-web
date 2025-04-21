@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ttg-client-web
 
-## Getting Started
+## Contributing
 
-First, run the development server:
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm)
+- [Node.js v20.x 'Iron' (LTS)](https://nodejs.org/en)
+- [Git](https://git-scm.com/)
+- [Visual Studio Code](https://code.visualstudio.com/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+You will need to provide the following environment variables:
 
-## Learn More
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_API_URL`: Your [ttg-server](https://github.com/tabletop-generator/ttg-server/) deployment URL
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the project to your workspace.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   git clone <url> ttg-client-web
+   cd ttg-client-web
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Create a .env file with development presets. Then enter your own environment variables from the links above.
 
-## Deploy on Vercel
+   ```bash
+   cp .env.example .env
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Install and use the project's supported Node.js version.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   With nvm:
+
+   ```bash
+   nvm install
+   ```
+
+   With fnm:
+
+   ```bash
+   fnm install
+   ```
+
+4. Install dependencies.
+
+   ```bash
+   npm install
+   ```
+
+5. Build the website.
+
+   ```bash
+   npm run build
+   ```
+
+6. Serve the website on `localhost:3000`.
+
+   ```bash
+   npm run serve
+   ```
+
+## Solution Stack
+
+- **Language:** [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- **Framework:** [Next.js](https://nextjs.org/docs)
+- **Styling:** [TailwindCSS](https://tailwindcss.com/docs/)
+- **Authentication:** [Supabase Auth](https://supabase.com/docs/guides/auth)
+- **Runtime:** [Node.js](https://nodejs.org/docs/latest-v20.x/api/)
+- **Package Manager:** [npm](https://docs.npmjs.com/)
+- **Version Control System:**
+  - [Git](https://git-scm.com/doc)
+  - [GitHub](https://docs.github.com/)
+- **CI/CD:** [GitHub Actions](https://docs.github.com/en/actions)
+- **Linting:** [ESLint](https://eslint.org/docs/v8.x/)
+- **Formatting:** [Prettier](https://prettier.io/docs/en/)
+- **Git Hooks:**
+  - [Husky](https://typicode.github.io/husky/)
+  - [lint-staged](https://github.com/lint-staged/lint-staged)
