@@ -1,15 +1,13 @@
-"use client";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { userAtom } from "@/store";
-import { useAtomValue } from "jotai";
+export default async function PrivatePage() {
+  const supabase = await createClient();
 
-export default function Page() {
-  const { id } = useAtomValue(userAtom);
-  const router = useRouter();
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect("/login");
+  }
 
-  useEffect(() => {
-    router.push(`/user/${id}`);
-  });
+  redirect(`/user/${data.user.id}`);
 }
