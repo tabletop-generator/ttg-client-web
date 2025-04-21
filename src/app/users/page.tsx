@@ -9,5 +9,5 @@ export default async function PrivatePage() {
     redirect("/login");
   }
 
-  redirect(`/user/${data.user.id}`);
+  redirect(`/users/${data.user.id}`);
 }
