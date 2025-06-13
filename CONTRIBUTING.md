@@ -13,7 +13,7 @@ These scripts are located in `package.json` and can be run using `npm run <scrip
 ### Linting & Formatting Scripts
 
 - `lint:` Run Next.js's built-in ESLint configuration.
-- `prettier`: Runs Prettier to format all files in the project directory.
+- `format`: Runs Prettier to format all files in the project directory.
 
 ## Workflow
 
