@@ -1,4 +1,4 @@
-import getCollection from "@/lib/getCollection";
+import { useCollection } from "@/lib/useCollection";
 
 export default async function Collection({
   params,
@@ -6,7 +6,7 @@ export default async function Collection({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const { name } = await getCollection(id);
+  const { collection } = useCollection(id);
 
-  return <h1>Hello {name}!</h1>;
+  return <h1>Hello {collection}!</h1>;
 }

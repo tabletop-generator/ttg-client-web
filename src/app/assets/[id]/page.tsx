@@ -1,4 +1,4 @@
-import getAsset from "@/lib/getAsset";
+import { useAsset } from "@/lib/useAsset";
 
 export default async function Asset({
   params,
@@ -6,7 +6,7 @@ export default async function Asset({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const { name } = await getAsset(id);
+  const { asset } = useAsset(id);
 
-  return <h1>Hello {name}!</h1>;
+  return <h1>Hello {asset}!</h1>;
 }
