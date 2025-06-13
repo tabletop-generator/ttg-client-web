@@ -4,7 +4,7 @@ import { fetcher } from "./fetcher";
 export function useAsset(id: string, token?: string) {
   const { data, error, isLoading } = useSWR(
     [`/v1/assets/${id}`, token],
-    fetcher
+    fetcher,
   );
 
   return {

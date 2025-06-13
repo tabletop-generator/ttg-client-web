@@ -4,7 +4,7 @@ import { fetcher } from "./fetcher";
 export function useUser(id: string, token?: string) {
   const { data, error, isLoading } = useSWR(
     [`/v1/users/${id}`, token],
-    fetcher
+    fetcher,
   );
 
   return {

@@ -16,7 +16,7 @@ export async function fetcher([route, token]: [string, string?]) {
   // we still try to parse and throw it.
   if (!res.ok) {
     const error = new Error(
-      `An error occurred while fetching the data.`
+      `An error occurred while fetching the data.`,
     ) as SWRResError;
     // Attach extra info to the error object.
     error.info = await res.json();
