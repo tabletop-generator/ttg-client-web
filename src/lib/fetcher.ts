@@ -1,5 +1,5 @@
 interface SWRResError extends Error {
-  info: any;
+  info: unknown;
   status: number;
 }
 
