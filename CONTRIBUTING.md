@@ -8,7 +8,7 @@ These scripts are located in `package.json` and can be run using `npm run <scrip
 
 - `dev`: Starts Next.js in development mode.
 - `build`: Builds the application for production usage and outputs the generated static site to `out/`.
-- `serve`: Serves the built static files from `out/`.
+- `start`: Starts the app.
 
 ### Linting & Formatting Scripts
 
@@ -55,7 +55,7 @@ Please follow the [GitHub flow](https://docs.github.com/en/get-started/using-git
    ```bash
    npm run lint
    npm run build
-   npm start:static
+   npm run start
    ```
 
 5. **Review your changes**

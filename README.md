@@ -61,7 +61,7 @@ You will need to provide the following environment variables:
 6. Serve the website on `localhost:3000`.
 
    ```bash
-   npm run serve
+   npm run start
    ```
 
 ## Solution Stack
