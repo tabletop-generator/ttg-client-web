@@ -11,5 +11,5 @@ export default function Collection({
   const { id } = React.use(params);
   const { collection } = useCollection(id);
 
-  return <h1>Hello {collection}!</h1>;
+  return <h1>Hello {`${collection}`}!</h1>;
 }

@@ -7,5 +7,5 @@ export default function Asset({ params }: { params: Promise<{ id: string }> }) {
   const { id } = React.use(params);
   const { asset } = useAsset(id);
 
-  return <h1>Hello {asset}!</h1>;
+  return <h1>Hello {`${asset}`}!</h1>;
 }
