@@ -66,7 +66,7 @@ You will need to provide the following environment variables:
 
 ## Solution Stack
 
-- **Language:** [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- **Language:** [TypeScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - **Framework:** [Next.js](https://nextjs.org/docs)
 - **Styling:** [TailwindCSS](https://tailwindcss.com/docs/)
 - **Authentication:** [Supabase Auth](https://supabase.com/docs/guides/auth)
