@@ -2,13 +2,10 @@ import useSWR from "swr";
 import { fetcher } from "./fetcher";
 import type { operations } from "@/types/schema";
 
-type CollectionQuery = {
-  limit?: number;
-  offset?: number;
-  userId?: string;
-};
-
-export function useCollections(query: CollectionQuery, token?: string) {
+export function useCollections(
+  query: operations["getCollections"]["parameters"]["query"] = {},
+  token?: string,
+) {
   const queryString = new URLSearchParams();
 
   for (const [key, value] of Object.entries(query)) {

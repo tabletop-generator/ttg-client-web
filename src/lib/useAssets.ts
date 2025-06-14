@@ -2,24 +2,10 @@ import useSWR from "swr";
 import { fetcher } from "./fetcher";
 import type { operations } from "@/types/schema";
 
-enum AssetType {
-  Character = "character",
-  Location = "location",
-  Quest = "quest",
-  Map = "map",
-}
-
-type AssetQuery = {
-  limit?: number;
-  offset?: number;
-  assetType?: AssetType;
-  collectionId?: string;
-  userId?: string;
-  name?: string;
-  description?: string;
-};
-
-export function useAssets(query: AssetQuery, token?: string) {
+export function useAssets(
+  query: operations["getAssets"]["parameters"]["query"] = {},
+  token?: string,
+) {
   const queryString = new URLSearchParams();
 
   for (const [key, value] of Object.entries(query)) {
