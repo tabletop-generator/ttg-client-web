@@ -37,7 +37,7 @@ export default function RootLayout({
               <Link href={`/create`}>Create</Link>
             </li>
             <li>
-              <Link href={`/users`}>Profile</Link>
+              <Link href={`/users/me`}>Profile</Link>
             </li>
           </ul>
         </nav>
