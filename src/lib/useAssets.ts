@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import { fetcher } from "./fetcher";
+import type { operations } from "@/types/schema";
 
 enum AssetType {
   Character = "character",
@@ -27,10 +28,9 @@ export function useAssets(query: AssetQuery, token?: string) {
     }
   }
 
-  const { data, error, isLoading } = useSWR(
-    [`/v1/assets?${queryString.toString()}`, token],
-    fetcher,
-  );
+  const { data, error, isLoading } = useSWR<
+    operations["getAssets"]["responses"]["200"]["content"]["application/json"]
+  >([`/v1/assets?${queryString.toString()}`, token], fetcher);
 
   return {
     assets: data,

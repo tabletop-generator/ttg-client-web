@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import { fetcher } from "./fetcher";
+import type { operations } from "@/types/schema";
 
 type CollectionQuery = {
   limit?: number;
@@ -16,10 +17,9 @@ export function useCollections(query: CollectionQuery, token?: string) {
     }
   }
 
-  const { data, error, isLoading } = useSWR(
-    [`/v1/collections?${queryString.toString()}`, token],
-    fetcher,
-  );
+  const { data, error, isLoading } = useSWR<
+    operations["getCollections"]["responses"]["200"]["content"]["application/json"]
+  >([`/v1/collections?${queryString.toString()}`, token], fetcher);
 
   return {
     collections: data,

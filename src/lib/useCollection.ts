@@ -1,11 +1,11 @@
 import useSWR from "swr";
 import { fetcher } from "./fetcher";
+import type { operations } from "@/types/schema";
 
 export function useCollection(id: string, token?: string) {
-  const { data, error, isLoading } = useSWR(
-    [`/v1/collections/${id}`, token],
-    fetcher,
-  );
+  const { data, error, isLoading } = useSWR<
+    operations["getCollectionById"]["responses"]["200"]["content"]["application/json"]
+  >([`/v1/collections/${id}`, token], fetcher);
 
   return {
     collection: data,

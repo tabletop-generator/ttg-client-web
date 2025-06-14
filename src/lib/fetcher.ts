@@ -3,7 +3,10 @@ interface SWRResError extends Error {
   status: number;
 }
 
-export async function fetcher([route, token]: [string, string?]) {
+export async function fetcher<T>([route, token]: [
+  string,
+  string?,
+]): Promise<T> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${route}`, {
     headers: token
       ? {
@@ -24,5 +27,5 @@ export async function fetcher([route, token]: [string, string?]) {
     throw error;
   }
 
-  return res.json();
+  return res.json() as Promise<T>;
 }
