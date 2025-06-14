@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useUser } from "@/lib/useUser";
 import { Session } from "@supabase/supabase-js";
 import { useAssets } from "@/lib/useAssets";
+import { useCollections } from "@/lib/useCollections";
 
 const supabase = createClient();
 
@@ -27,6 +28,12 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
     isError: isAssetsError,
     isLoading: isAssetsLoading,
   } = useAssets({ userId: id }, session?.access_token);
+
+  const {
+    collections,
+    isError: isCollectionsError,
+    isLoading: isCollectionsLoading,
+  } = useCollections({ userId: id }, session?.access_token);
 
   React.useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -57,6 +64,13 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
           : isAssetsLoading
             ? "Loading user assets..."
             : JSON.stringify(assets)}
+      </p>
+      <p>
+        {isCollectionsError
+          ? "Failed to load user collections"
+          : isCollectionsLoading
+            ? "Loading user collections..."
+            : JSON.stringify(collections)}
       </p>
     </>
   );
