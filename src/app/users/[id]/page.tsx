@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useUser } from "@/lib/useUser";
 import { Session } from "@supabase/supabase-js";
+import { useAssets } from "@/lib/useAssets";
 
 const supabase = createClient();
 
@@ -15,7 +16,17 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
   const [session, setSession] = React.useState<Session | null>(null);
   const [checkingSession, setCheckingSession] = React.useState(true);
 
-  const { user, isError, isLoading } = useUser(id, session?.access_token);
+  const {
+    user,
+    isError: isUserError,
+    isLoading: isUserLoading,
+  } = useUser(id, session?.access_token);
+
+  const {
+    assets,
+    isError: isAssetsError,
+    isLoading: isAssetsLoading,
+  } = useAssets({ userId: id }, session?.access_token);
 
   React.useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -29,9 +40,24 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
     });
   }, [router]);
 
-  if (checkingSession) return <p>Checking session...</p>;
-  if (isError) return <h1>Failed to load user</h1>;
-  if (isLoading) return <div>Loading user...</div>;
-
-  return <h1>Hello, {JSON.stringify(user)}!</h1>;
+  return (
+    <>
+      <h1>
+        {checkingSession
+          ? "Checking session..."
+          : isUserError
+            ? "Failed to load user"
+            : isUserLoading
+              ? "Loading user..."
+              : `Hello, ${JSON.stringify(user)}!`}
+      </h1>
+      <p>
+        {isAssetsError
+          ? "Failed to load user assets"
+          : isAssetsLoading
+            ? "Loading user assets..."
+            : JSON.stringify(assets)}
+      </p>
+    </>
+  );
 }
