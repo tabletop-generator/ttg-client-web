@@ -60,25 +60,6 @@ export interface paths {
     patch: operations["patchAssetById"];
     trace?: never;
   };
-  "/assets/{assetId}/like": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        assetId: components["parameters"]["assetIdPathParam"];
-      };
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /** Toggle like status for an asset */
-    post: operations["likeAssetById"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   "/assets/{assetId}/comments": {
     parameters: {
       query?: never;
@@ -99,24 +80,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  "/comments/{commentId}": {
+  "/assets/{assetId}/like": {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        commentId: components["parameters"]["commentIdPathParam"];
+        assetId: components["parameters"]["assetIdPathParam"];
       };
       cookie?: never;
     };
     get?: never;
     put?: never;
-    post?: never;
-    /** Delete a specific comment by its ID */
-    delete: operations["deleteCommentById"];
+    /** Toggle like status for an asset */
+    post: operations["likeAssetById"];
+    delete?: never;
     options?: never;
     head?: never;
-    /** Update a specific comment by its ID */
-    patch: operations["patchCommentById"];
+    patch?: never;
     trace?: never;
   };
   "/collections": {
@@ -196,6 +176,26 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/comments/{commentId}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentId: components["parameters"]["commentIdPathParam"];
+      };
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    /** Delete a specific comment by its ID */
+    delete: operations["deleteCommentById"];
+    options?: never;
+    head?: never;
+    /** Update a specific comment by its ID */
+    patch: operations["patchCommentById"];
+    trace?: never;
+  };
   "/users": {
     parameters: {
       query?: never;
@@ -254,88 +254,37 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
-    /** @enum {string} */
-    visibility: "public" | "private" | "unlisted";
-    /** @enum {string} */
-    assetType: "character" | "location" | "quest" | "map";
-    comment: components["schemas"]["userSummary"] & {
-      /** Format: uuid */
-      commentId: string;
-      body: string;
-      /** Format: date-time */
-      createdAt: string;
-      /** Format: date-time */
-      updatedAt: string;
-    };
-    collection: components["schemas"]["userSummary"] & {
-      /** Format: uuid */
-      collectionId: string;
-      /** Format: date-time */
-      createdAt: string;
-      /** Format: date-time */
-      updatedAt: string;
-      visibility: components["schemas"]["visibility"];
-      name: string;
-      description: string;
-      assetCount: number;
-    };
-    userSummary: {
-      /** Format: uuid */
-      userId: string;
-      displayName: string;
-    };
     asset: components["schemas"]["userSummary"] & {
       /** Format: uuid */
       assetId: string;
       assetType: components["schemas"]["assetType"];
-      name: string;
-      visibility: components["schemas"]["visibility"];
-      /** Format: uri */
-      imageUrl: string;
-      likeCount: number;
-      isLikedByCurrentUser: boolean;
+      commentCount: number;
       /** Format: date-time */
       createdAt: string;
+      description: string;
+      /** Format: uri */
+      imageUrl: string;
+      isLikedByCurrentUser: boolean;
+      likeCount: number;
+      name: string;
       /** Format: date-time */
       updatedAt: string;
-      description: string;
-      commentCount: number;
+      visibility: components["schemas"]["visibility"];
     };
     assetData:
       | components["schemas"]["character"]
       | components["schemas"]["location"]
       | components["schemas"]["quest"]
       | components["schemas"]["map"];
+    assetDataCreate:
+      | components["schemas"]["characterCreate"]
+      | components["schemas"]["locationCreate"]
+      | components["schemas"]["questCreate"]
+      | components["schemas"]["mapCreate"];
+    /** @enum {string} */
+    assetType: "character" | "location" | "quest" | "map";
     character: {
-      /** @enum {string} */
-      race:
-        | "human"
-        | "elf"
-        | "drow"
-        | "half_elf"
-        | "half_orc"
-        | "halfling"
-        | "dwarf"
-        | "gnome"
-        | "tiefling"
-        | "githyanki"
-        | "dragonborn";
-      /** @enum {string} */
-      class:
-        | "barbarian"
-        | "bard"
-        | "cleric"
-        | "druid"
-        | "fighter"
-        | "monk"
-        | "paladin"
-        | "ranger"
-        | "rogue"
-        | "sorcerer"
-        | "warlock"
-        | "wizard";
-      /** @enum {string} */
-      gender: "male" | "female" | "non_binary" | "genderfluid" | "agender";
+      abilities: string;
       /** @enum {string} */
       alignment:
         | "lawful_good"
@@ -348,84 +297,12 @@ export interface components {
         | "neutral_evil"
         | "chaotic_evil";
       appearance: string;
-      personality: string;
-      background: string;
-      abilities: string;
-      equipment: string;
-      motivation: string;
-      notes: string;
       /**
        * @description discriminator enum property added by openapi-typescript
        * @enum {string}
        */
       assetType: "character";
-    };
-    location: {
-      locationType: string;
-      terrain: string;
-      climate: string;
-      atmosphere: string;
-      inhabitants: string;
-      dangerLevel: string;
-      pointsOfInterest: string;
-      narrativeRole: string;
-      notes: string;
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      assetType: "location";
-    };
-    quest: {
-      questType: string;
-      tone: string;
-      location: string;
-      complexity: string;
-      objective: string;
-      antagonist: string;
-      notableNPCs: string;
-      hasCombat: boolean;
-      hasPuzzles: boolean;
-      hasSkillChallenges: boolean;
-      hasDilemmas: boolean;
-      notes: string;
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      assetType: "quest";
-    };
-    map: {
-      mapType: string;
-      terrain: string;
-      scale: string;
-      pointsOfInterest: string;
-      notes: string;
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      assetType: "map";
-    };
-    assetDataCreate:
-      | components["schemas"]["characterCreate"]
-      | components["schemas"]["locationCreate"]
-      | components["schemas"]["questCreate"]
-      | components["schemas"]["mapCreate"];
-    characterCreate: {
-      /** @enum {string} */
-      race:
-        | "human"
-        | "elf"
-        | "drow"
-        | "half_elf"
-        | "half_orc"
-        | "halfling"
-        | "dwarf"
-        | "gnome"
-        | "tiefling"
-        | "githyanki"
-        | "dragonborn";
+      background: string;
       /** @enum {string} */
       class:
         | "barbarian"
@@ -440,8 +317,28 @@ export interface components {
         | "sorcerer"
         | "warlock"
         | "wizard";
+      equipment: string;
       /** @enum {string} */
       gender: "male" | "female" | "non_binary" | "genderfluid" | "agender";
+      motivation: string;
+      notes: string;
+      personality: string;
+      /** @enum {string} */
+      race:
+        | "human"
+        | "elf"
+        | "drow"
+        | "half_elf"
+        | "half_orc"
+        | "halfling"
+        | "dwarf"
+        | "gnome"
+        | "tiefling"
+        | "githyanki"
+        | "dragonborn";
+    };
+    characterCreate: {
+      abilities?: string;
       /** @enum {string} */
       alignment:
         | "lawful_good"
@@ -454,81 +351,150 @@ export interface components {
         | "neutral_evil"
         | "chaotic_evil";
       appearance?: string;
-      personality?: string;
       background?: string;
-      abilities?: string;
+      /** @enum {string} */
+      class:
+        | "barbarian"
+        | "bard"
+        | "cleric"
+        | "druid"
+        | "fighter"
+        | "monk"
+        | "paladin"
+        | "ranger"
+        | "rogue"
+        | "sorcerer"
+        | "warlock"
+        | "wizard";
       equipment?: string;
+      /** @enum {string} */
+      gender: "male" | "female" | "non_binary" | "genderfluid" | "agender";
       motivation?: string;
       notes?: string;
+      personality?: string;
+      /** @enum {string} */
+      race:
+        | "human"
+        | "elf"
+        | "drow"
+        | "half_elf"
+        | "half_orc"
+        | "halfling"
+        | "dwarf"
+        | "gnome"
+        | "tiefling"
+        | "githyanki"
+        | "dragonborn";
+    };
+    collection: components["schemas"]["userSummary"] & {
+      assetCount: number;
+      /** Format: uuid */
+      collectionId: string;
+      /** Format: date-time */
+      createdAt: string;
+      description: string;
+      name: string;
+      /** Format: date-time */
+      updatedAt: string;
+      visibility: components["schemas"]["visibility"];
+    };
+    comment: components["schemas"]["userSummary"] & {
+      body: string;
+      /** Format: uuid */
+      commentId: string;
+      /** Format: date-time */
+      createdAt: string;
+      /** Format: date-time */
+      updatedAt: string;
+    };
+    location: {
+      /**
+       * @description discriminator enum property added by openapi-typescript
+       * @enum {string}
+       */
+      assetType: "location";
+      atmosphere: string;
+      climate: string;
+      dangerLevel: string;
+      inhabitants: string;
+      locationType: string;
+      narrativeRole: string;
+      notes: string;
+      pointsOfInterest: string;
+      terrain: string;
     };
     locationCreate: {
-      locationType: string;
-      terrain?: string;
-      climate?: string;
       atmosphere?: string;
-      inhabitants?: string;
+      climate?: string;
       dangerLevel?: string;
-      pointsOfInterest?: string;
+      inhabitants?: string;
+      locationType: string;
       narrativeRole?: string;
       notes?: string;
+      pointsOfInterest?: string;
+      terrain?: string;
     };
-    questCreate: {
-      questType: string;
-      tone?: string;
-      location?: string;
-      complexity?: string;
-      objective?: string;
-      antagonist?: string;
-      notableNPCs?: string;
-      hasCombat: boolean;
-      hasPuzzles: boolean;
-      hasSkillChallenges: boolean;
-      hasDilemmas: boolean;
-      notes?: string;
+    map: {
+      /**
+       * @description discriminator enum property added by openapi-typescript
+       * @enum {string}
+       */
+      assetType: "map";
+      mapType: string;
+      notes: string;
+      pointsOfInterest: string;
+      scale: string;
+      terrain: string;
     };
     mapCreate: {
       mapType: string;
-      terrain?: string;
-      scale?: string;
-      pointsOfInterest?: string;
       notes?: string;
+      pointsOfInterest?: string;
+      scale?: string;
+      terrain?: string;
     };
+    quest: {
+      antagonist: string;
+      /**
+       * @description discriminator enum property added by openapi-typescript
+       * @enum {string}
+       */
+      assetType: "quest";
+      complexity: string;
+      hasCombat: boolean;
+      hasDilemmas: boolean;
+      hasPuzzles: boolean;
+      hasSkillChallenges: boolean;
+      location: string;
+      notableNPCs: string;
+      notes: string;
+      objective: string;
+      questType: string;
+      tone: string;
+    };
+    questCreate: {
+      antagonist?: string;
+      complexity?: string;
+      hasCombat: boolean;
+      hasDilemmas: boolean;
+      hasPuzzles: boolean;
+      hasSkillChallenges: boolean;
+      location?: string;
+      notableNPCs?: string;
+      notes?: string;
+      objective?: string;
+      questType: string;
+      tone?: string;
+    };
+    userSummary: {
+      displayName: string;
+      /** Format: uuid */
+      userId: string;
+    };
+    /** @enum {string} */
+    visibility: "public" | "private" | "unlisted";
   };
   responses: {
-    /** @description Health check response */
-    HealthCheck: {
-      headers: {
-        [name: string]: unknown;
-      };
-      content: {
-        "application/json": {
-          /** @enum {string} */
-          status: "ok";
-          /** Format: uri */
-          githubUrl: string;
-          version: string;
-          hostname: string;
-          /** Format: date-time */
-          timestamp: string;
-        };
-      };
-    };
-    /** @description Standard error response */
-    ErrorResponse: {
-      headers: {
-        [name: string]: unknown;
-      };
-      content: {
-        "application/json": {
-          /** @enum {string} */
-          status: "error";
-          error: {
-            message: string;
-            code: number;
-          };
-        };
-      };
-    };
     /** @description OK */
     AssetDetails: {
       headers: {
@@ -549,8 +515,8 @@ export interface components {
         "application/json": {
           /** Format: uuid */
           assetId: string;
-          likeCount: number;
           isLikedByCurrentUser: boolean;
+          likeCount: number;
         };
       };
     };
@@ -562,26 +528,6 @@ export interface components {
       content: {
         "application/json": {
           assets: components["schemas"]["asset"][];
-        };
-      };
-    };
-    /** @description OK */
-    CommentDetails: {
-      headers: {
-        [name: string]: unknown;
-      };
-      content: {
-        "application/json": components["schemas"]["comment"];
-      };
-    };
-    /** @description OK */
-    CommentList: {
-      headers: {
-        [name: string]: unknown;
-      };
-      content: {
-        "application/json": {
-          comments: components["schemas"]["comment"][];
         };
       };
     };
@@ -608,45 +554,124 @@ export interface components {
       };
     };
     /** @description OK */
+    CommentDetails: {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": components["schemas"]["comment"];
+      };
+    };
+    /** @description OK */
+    CommentList: {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          comments: components["schemas"]["comment"][];
+        };
+      };
+    };
+    /** @description Standard error response */
+    ErrorResponse: {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          error: {
+            code: number;
+            message: string;
+          };
+          /** @enum {string} */
+          status: "error";
+        };
+      };
+    };
+    /** @description Health check response */
+    HealthCheck: {
+      headers: {
+        [name: string]: unknown;
+      };
+      content: {
+        "application/json": {
+          /** Format: uri */
+          githubUrl: string;
+          hostname: string;
+          /** @enum {string} */
+          status: "ok";
+          /** Format: date-time */
+          timestamp: string;
+          version: string;
+        };
+      };
+    };
+    /** @description OK */
     UserDetails: {
       headers: {
         [name: string]: unknown;
       };
       content: {
         "application/json": {
-          /** Format: uuid */
-          userId: string;
+          bio: string;
           /** Format: date-time */
           createdAt: string;
+          displayName: string;
           /** Format: date-time */
           updatedAt: string;
-          displayName: string;
-          bio: string;
+          /** Format: uuid */
+          userId: string;
         };
       };
     };
   };
   parameters: {
-    limitQueryParam: number;
-    offsetQueryParam: number;
-    nameQueryParam: string;
-    descriptionQueryParam: string;
-    assetTypeQueryParam: components["schemas"]["assetType"];
-    userIdQueryParam: string;
-    collectionIdQueryParam: string;
-    userIdPathParam: string;
-    collectionIdPathParam: string;
     assetIdPathParam: string;
+    assetTypeQueryParam: components["schemas"]["assetType"];
+    collectionIdPathParam: string;
+    collectionIdQueryParam: string;
     commentIdPathParam: string;
+    descriptionQueryParam: string;
+    limitQueryParam: number;
+    nameQueryParam: string;
+    offsetQueryParam: number;
+    userIdPathParam: string;
+    userIdQueryParam: string;
   };
   requestBodies: {
     assetCreate: {
       content: {
         "application/json": {
-          name: string;
           assetType: components["schemas"]["assetType"];
-          visibility: components["schemas"]["visibility"];
           data: components["schemas"]["assetDataCreate"];
+          name: string;
+          visibility: components["schemas"]["visibility"];
+        };
+      };
+    };
+    assetIds: {
+      content: {
+        "application/json": {
+          assetIds: string[];
+        };
+      };
+    };
+    assetUpdate: {
+      content: {
+        "application/json": {
+          description?: string;
+          name?: string;
+          visibility?: components["schemas"]["visibility"];
+        };
+      };
+    };
+    collectionCreateAndUpdate: {
+      content: {
+        "application/json": {
+          description?: string;
+          name: string;
+          visibility?: components["schemas"]["visibility"];
         };
       };
     };
@@ -657,36 +682,11 @@ export interface components {
         };
       };
     };
-    collectionCreateAndUpdate: {
-      content: {
-        "application/json": {
-          name: string;
-          description?: string;
-          visibility?: components["schemas"]["visibility"];
-        };
-      };
-    };
     userUpdate: {
       content: {
         "application/json": {
-          displayName?: string;
           bio?: string;
-        };
-      };
-    };
-    assetUpdate: {
-      content: {
-        "application/json": {
-          name?: string;
-          description?: string;
-          visibility?: components["schemas"]["visibility"];
-        };
-      };
-    };
-    assetIds: {
-      content: {
-        "application/json": {
-          assetIds: string[];
+          displayName?: string;
         };
       };
     };
@@ -713,13 +713,13 @@ export interface operations {
   getAssets: {
     parameters: {
       query?: {
-        limit?: components["parameters"]["limitQueryParam"];
-        offset?: components["parameters"]["offsetQueryParam"];
         assetType?: components["parameters"]["assetTypeQueryParam"];
         collectionId?: components["parameters"]["collectionIdQueryParam"];
-        userId?: components["parameters"]["userIdQueryParam"];
-        name?: components["parameters"]["nameQueryParam"];
         description?: components["parameters"]["descriptionQueryParam"];
+        limit?: components["parameters"]["limitQueryParam"];
+        name?: components["parameters"]["nameQueryParam"];
+        offset?: components["parameters"]["offsetQueryParam"];
+        userId?: components["parameters"]["userIdQueryParam"];
       };
       header?: never;
       path?: never;
@@ -809,24 +809,6 @@ export interface operations {
       500: components["responses"]["ErrorResponse"];
     };
   };
-  likeAssetById: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        assetId: components["parameters"]["assetIdPathParam"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: components["responses"]["AssetLike"];
-      401: components["responses"]["ErrorResponse"];
-      403: components["responses"]["ErrorResponse"];
-      404: components["responses"]["ErrorResponse"];
-      500: components["responses"]["ErrorResponse"];
-    };
-  };
   getCommentsByAssetId: {
     parameters: {
       query?: {
@@ -867,47 +849,21 @@ export interface operations {
       500: components["responses"]["ErrorResponse"];
     };
   };
-  deleteCommentById: {
+  likeAssetById: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        commentId: components["parameters"]["commentIdPathParam"];
+        assetId: components["parameters"]["assetIdPathParam"];
       };
       cookie?: never;
     };
     requestBody?: never;
     responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
+      200: components["responses"]["AssetLike"];
       401: components["responses"]["ErrorResponse"];
       403: components["responses"]["ErrorResponse"];
       404: components["responses"]["ErrorResponse"];
-      500: components["responses"]["ErrorResponse"];
-    };
-  };
-  patchCommentById: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        commentId: components["parameters"]["commentIdPathParam"];
-      };
-      cookie?: never;
-    };
-    requestBody?: components["requestBodies"]["commentCreateAndUpdate"];
-    responses: {
-      200: components["responses"]["CommentDetails"];
-      400: components["responses"]["ErrorResponse"];
-      401: components["responses"]["ErrorResponse"];
-      403: components["responses"]["ErrorResponse"];
-      404: components["responses"]["ErrorResponse"];
-      415: components["responses"]["ErrorResponse"];
       500: components["responses"]["ErrorResponse"];
     };
   };
@@ -1039,6 +995,50 @@ export interface operations {
     requestBody?: components["requestBodies"]["assetIds"];
     responses: {
       200: components["responses"]["CollectionDetails"];
+      400: components["responses"]["ErrorResponse"];
+      401: components["responses"]["ErrorResponse"];
+      403: components["responses"]["ErrorResponse"];
+      404: components["responses"]["ErrorResponse"];
+      415: components["responses"]["ErrorResponse"];
+      500: components["responses"]["ErrorResponse"];
+    };
+  };
+  deleteCommentById: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentId: components["parameters"]["commentIdPathParam"];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      401: components["responses"]["ErrorResponse"];
+      403: components["responses"]["ErrorResponse"];
+      404: components["responses"]["ErrorResponse"];
+      500: components["responses"]["ErrorResponse"];
+    };
+  };
+  patchCommentById: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentId: components["parameters"]["commentIdPathParam"];
+      };
+      cookie?: never;
+    };
+    requestBody?: components["requestBodies"]["commentCreateAndUpdate"];
+    responses: {
+      200: components["responses"]["CommentDetails"];
       400: components["responses"]["ErrorResponse"];
       401: components["responses"]["ErrorResponse"];
       403: components["responses"]["ErrorResponse"];
