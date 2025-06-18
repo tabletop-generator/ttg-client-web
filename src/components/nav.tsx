@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { ModeToggle } from "./mode-toggle";
 
 export default async function Nav() {
   const supabase = await createClient();
@@ -22,7 +21,6 @@ export default async function Nav() {
           </Link>
         </li>
       </ul>
-      <ModeToggle />
     </nav>
   );
 }
