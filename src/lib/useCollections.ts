@@ -19,7 +19,7 @@ export function useCollections(
   >([`/v1/collections?${queryString.toString()}`, token], fetcher);
 
   return {
-    collections: data,
+    collections: data?.collections,
     isLoading,
     isError: error,
   };

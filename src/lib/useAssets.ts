@@ -19,7 +19,7 @@ export function useAssets(
   >([`/v1/assets?${queryString.toString()}`, token], fetcher);
 
   return {
-    assets: data,
+    assets: data?.assets,
     isLoading,
     isError: error,
   };
