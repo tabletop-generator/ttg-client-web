@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useCollection } from "@/lib/useCollection";
+import { useCollection } from "@/lib/use-collection";
 
 export default function Collection({
   params,

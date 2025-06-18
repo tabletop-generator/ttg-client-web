@@ -1,7 +1,7 @@
 "use client";
 
-import { useAssets } from "@/lib/useAssets";
-import { useCollections } from "@/lib/useCollections";
+import { useAssets } from "@/lib/use-assets";
+import { useCollections } from "@/lib/use-collections";
 
 export default function Discover() {
   const {

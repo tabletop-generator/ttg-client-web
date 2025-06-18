@@ -3,10 +3,10 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { useUser } from "@/lib/useUser";
+import { useUser } from "@/lib/use-user";
 import { Session } from "@supabase/supabase-js";
-import { useAssets } from "@/lib/useAssets";
-import { useCollections } from "@/lib/useCollections";
+import { useAssets } from "@/lib/use-assets";
+import { useCollections } from "@/lib/use-collections";
 
 const supabase = createClient();
 
