@@ -9,8 +9,8 @@ export default async function Nav() {
           TTG
         </Link>
       </div>
-      <nav className="navbar-center">
-        <ul className="menu menu-horizontal px-1">
+      <nav className="navbar-center hidden sm:inline">
+        <ul className="menu menu-horizontal">
           <li>
             <Link href="/">Home</Link>
           </li>

@@ -4,7 +4,7 @@ import "./globals.css";
 import Nav from "@/components/nav";
 import { AuthProvider } from "@/context/auth-provider";
 import { Suspense } from "react";
-import Footer from "@/components/footer";
+import Dock from "@/components/dock";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +38,7 @@ export default function RootLayout({
               <main className="flex flex-grow flex-col content-center">
                 {children}
               </main>
-              <Footer />
+              <Dock />
             </div>
           </AuthProvider>
         </Suspense>
