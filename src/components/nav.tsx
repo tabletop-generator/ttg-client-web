@@ -14,8 +14,10 @@ export default function Nav() {
 
   function triggerToast(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     e.preventDefault();
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 5000);
+    if (!showToast) {
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 5000);
+    }
   }
 
   return (
@@ -49,7 +51,9 @@ export default function Nav() {
                 href="/create"
                 className={pathname === "/create" ? "menu-active" : ""}
                 onClick={(e) => {
-                  triggerToast(e);
+                  if (!session) {
+                    triggerToast(e);
+                  }
                 }}
               >
                 <CirclePlus className="size-[1.2em]" />

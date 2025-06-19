@@ -14,8 +14,10 @@ export default function Dock() {
 
   function triggerToast(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     e.preventDefault();
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 5000);
+    if (!showToast) {
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 5000);
+    }
   }
 
   return (
@@ -39,7 +41,9 @@ export default function Dock() {
           href="/create"
           className={pathname === "/create" ? "dock-active" : ""}
           onClick={(e) => {
-            triggerToast(e);
+            if (!session) {
+              triggerToast(e);
+            }
           }}
         >
           <CirclePlus className="size-[1.2em]" />
