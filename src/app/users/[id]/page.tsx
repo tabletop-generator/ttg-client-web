@@ -5,6 +5,7 @@ import { useUser } from "@/lib/use-user";
 import { useAssets } from "@/lib/use-assets";
 import { useCollections } from "@/lib/use-collections";
 import { useAuth } from "@/context/auth-provider";
+import LoginLogoutButton from "@/components/login-button";
 
 export default function User({ params }: { params: Promise<{ id: string }> }) {
   const { id } = React.use(params);
@@ -31,6 +32,7 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
 
   return (
     <>
+      {session?.user.id === id && <LoginLogoutButton />}
       <h1>
         {isAuthLoading
           ? "Checking session..."

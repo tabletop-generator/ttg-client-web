@@ -1,30 +1,66 @@
-import Link from "next/link";
-import LoginLogoutButton from "./login-button";
+"use client";
 
-export default async function Nav() {
+import { useAuth } from "@/context/auth-provider";
+import { CirclePlus, CircleUserRound, Compass, LogIn } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+export default function Nav() {
+  const pathname = usePathname();
+  const { session } = useAuth();
+
   return (
-    <div className="navbar shadow-sm">
+    <div className="navbar hidden shadow-sm sm:flex">
       <div className="navbar-start">
         <Link href="/" className="btn btn-ghost text-xl">
           TTG
         </Link>
       </div>
-      <nav className="navbar-center hidden sm:inline">
-        <ul className="menu menu-horizontal">
+      <nav className="navbar-end hidden justify-end sm:flex">
+        <ul className="menu menu-horizontal gap-4">
           <li>
-            <Link href="/">Home</Link>
+            <Link
+              href="/discover"
+              className={pathname === "/discover" ? "menu-active" : ""}
+            >
+              <Compass className="size-[1.2em]" />
+              Discover
+            </Link>
           </li>
           <li>
-            <Link href="/create">Create</Link>
+            <Link
+              href="/create"
+              className={pathname === "/create" ? "menu-active" : ""}
+            >
+              <CirclePlus className="size-[1.2em]" />
+              Create
+            </Link>
           </li>
-          <li>
-            <Link href="/users/me">Profile</Link>
-          </li>
+          {session ? (
+            <li>
+              <Link
+                href="/users/me"
+                className={
+                  pathname === `/users/${session?.user.id}` ? "menu-active" : ""
+                }
+              >
+                <CircleUserRound className="size-[1.2em]" />
+                Profile
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link
+                href="/login"
+                className={pathname === "/login" ? "menu-active" : ""}
+              >
+                <LogIn className="size-[1.2em]" />
+                Login
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
-      <div className="navbar-end">
-        <LoginLogoutButton />
-      </div>
     </div>
   );
 }
