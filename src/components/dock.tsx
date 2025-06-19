@@ -12,7 +12,7 @@ export default function Dock() {
   return (
     <div className="dock sm:hidden">
       <Link href="/" className={pathname === "/discover" ? "dock-active" : ""}>
-        <Compass />
+        <Compass className="size-[1.2em]" />
         <span className="dock-label">Discover</span>
       </Link>
 
@@ -20,7 +20,7 @@ export default function Dock() {
         href="/create"
         className={pathname === "/create" ? "dock-active" : ""}
       >
-        <CirclePlus />
+        <CirclePlus className="size-[1.2em]" />
         <span className="dock-label">Create</span>
       </Link>
 
@@ -31,7 +31,7 @@ export default function Dock() {
             pathname === `/users/${session?.user.id}` ? "dock-active" : ""
           }
         >
-          <CircleUserRound />
+          <CircleUserRound className="size-[1.2em]" />
           <span className="dock-label">Profile</span>
         </Link>
       ) : (
@@ -39,7 +39,7 @@ export default function Dock() {
           href="/login"
           className={pathname === `/login` ? "dock-active" : ""}
         >
-          <LogIn />
+          <LogIn className="size-[1.2em]" />
           <span className="dock-label">Login</span>
         </Link>
       )}
