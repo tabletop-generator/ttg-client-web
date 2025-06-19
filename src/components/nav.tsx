@@ -46,7 +46,7 @@ export default function Nav() {
                 Discover
               </Link>
             </li>
-            <li>
+            <li className={!session ? "text-base-content/50" : ""}>
               <Link
                 href="/create"
                 className={pathname === "/create" ? "menu-active" : ""}

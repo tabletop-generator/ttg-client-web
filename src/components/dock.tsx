@@ -39,7 +39,10 @@ export default function Dock() {
         </Link>
         <Link
           href="/create"
-          className={pathname === "/create" ? "dock-active" : ""}
+          className={
+            (pathname === "/create" ? "dock-active " : "") +
+            (!session ? "text-base-content/50" : "")
+          }
           onClick={(e) => {
             if (!session) {
               triggerToast(e);
