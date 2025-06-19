@@ -1,28 +1,30 @@
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import LoginLogoutButton from "./login-button";
 
 export default async function Nav() {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase.auth.getUser();
-
   return (
-    <header>
-      <nav>
-        <ul>
+    <div className="navbar shadow-sm">
+      <div className="navbar-start">
+        <Link href="/" className="btn btn-ghost text-xl">
+          TTG
+        </Link>
+      </div>
+      <nav className="navbar-center">
+        <ul className="menu menu-horizontal px-1">
           <li>
-            <Link href={`/`}>Home</Link>
+            <Link href="/">Home</Link>
           </li>
           <li>
-            <Link href={`/create`}>Create</Link>
+            <Link href="/create">Create</Link>
           </li>
           <li>
-            <Link href={`/users/me`}>
-              {error || !data?.user ? "Login" : "Profile"}
-            </Link>
+            <Link href="/users/me">Profile</Link>
           </li>
         </ul>
       </nav>
-    </header>
+      <div className="navbar-end">
+        <LoginLogoutButton />
+      </div>
+    </div>
   );
 }
