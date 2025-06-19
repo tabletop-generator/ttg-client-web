@@ -5,7 +5,10 @@ export default function Footer() {
   return (
     <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-4">
       <aside className="grid-flow-col items-center">
-        <p>Copyright © {new Date().getFullYear()} - All rights reserved</p>
+        <p>
+          Copyright © Uday Rana {new Date().getFullYear()} - All rights
+          reserved
+        </p>
       </aside>
       <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
         <Link href="https://github.com/tabletop-generator">
