@@ -13,8 +13,8 @@ export default function Footer() {
       <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
         <Link href="https://github.com/tabletop-generator">
           <Image
-            className="dark:invert"
-            src="./github-mark.svg"
+            className="invert"
+            src="/github-mark.svg"
             alt="GitHub logo"
             width={24}
             height={24}
