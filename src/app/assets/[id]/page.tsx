@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { useAsset } from "@/lib/useAsset";
-import { useComments } from "@/lib/useComments";
+import { useAsset } from "@/lib/use-asset";
+import { useComments } from "@/lib/use-comments";
 
 export default function Asset({ params }: { params: Promise<{ id: string }> }) {
   const { id } = React.use(params);

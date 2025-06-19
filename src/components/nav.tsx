@@ -1,28 +1,30 @@
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
-import { ModeToggle } from "./mode-toggle";
+import LoginLogoutButton from "./login-button";
 
 export default async function Nav() {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase.auth.getUser();
-
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link href={`/`}>Home</Link>
-        </li>
-        <li>
-          <Link href={`/create`}>Create</Link>
-        </li>
-        <li>
-          <Link href={`/users/me`}>
-            {error || !data?.user ? "Login" : "Profile"}
-          </Link>
-        </li>
-      </ul>
-      <ModeToggle />
-    </nav>
+    <div className="navbar shadow-sm">
+      <div className="navbar-start">
+        <Link href="/" className="btn btn-ghost text-xl">
+          TTG
+        </Link>
+      </div>
+      <nav className="navbar-center">
+        <ul className="menu menu-horizontal px-1">
+          <li>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
+            <Link href="/create">Create</Link>
+          </li>
+          <li>
+            <Link href="/users/me">Profile</Link>
+          </li>
+        </ul>
+      </nav>
+      <div className="navbar-end">
+        <LoginLogoutButton />
+      </div>
+    </div>
   );
 }
