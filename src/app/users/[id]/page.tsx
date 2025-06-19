@@ -1,21 +1,15 @@
 "use client";
 
 import * as React from "react";
-import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
 import { useUser } from "@/lib/use-user";
-import { Session } from "@supabase/supabase-js";
 import { useAssets } from "@/lib/use-assets";
 import { useCollections } from "@/lib/use-collections";
-
-const supabase = createClient();
+import { useAuth } from "@/context/auth-provider";
 
 export default function User({ params }: { params: Promise<{ id: string }> }) {
   const { id } = React.use(params);
-  const router = useRouter();
 
-  const [session, setSession] = React.useState<Session | null>(null);
-  const [checkingSession, setCheckingSession] = React.useState(true);
+  const { session, isLoading: isAuthLoading } = useAuth();
 
   const {
     user,
@@ -35,22 +29,10 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
     isLoading: isCollectionsLoading,
   } = useCollections({ userId: id }, session?.access_token);
 
-  React.useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log(session);
-      if (!session) {
-        router.push("/login");
-      } else {
-        setSession(session);
-      }
-      setCheckingSession(false);
-    });
-  }, [router]);
-
   return (
     <>
       <h1>
-        {checkingSession
+        {isAuthLoading
           ? "Checking session..."
           : isUserError
             ? "Failed to load user"
