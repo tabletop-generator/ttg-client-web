@@ -25,7 +25,7 @@ export default function Dock() {
       {showToast && (
         <div className="toast toast-top toast-center z-50">
           <div className="alert alert-error">
-            <span>Log in to use this feature</span>
+            <span>Log in to use this feature.</span>
           </div>
         </div>
       )}
