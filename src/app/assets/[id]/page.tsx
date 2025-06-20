@@ -23,17 +23,17 @@ export default function Asset({ params }: { params: Promise<{ id: string }> }) {
     <>
       <h1>Hello /assets!</h1>
       <p>
-        {isAssetError
-          ? "Failed to load asset"
-          : isAssetLoading
-            ? "Loading asset..."
+        {isAssetLoading
+          ? "Loading asset..."
+          : isAssetError
+            ? "Failed to load asset"
             : JSON.stringify(asset)}
       </p>
       <p>
-        {isCommentError
-          ? "Failed to load asset comments"
-          : isCommentLoading
-            ? "Loading asset comments..."
+        {isCommentLoading
+          ? "Loading asset comments..."
+          : isCommentError
+            ? "Failed to load asset comments"
             : JSON.stringify(comments)}
       </p>
     </>

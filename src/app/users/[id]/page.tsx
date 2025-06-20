@@ -36,24 +36,24 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
       <h1>
         {isAuthLoading
           ? "Checking session..."
-          : isUserError
-            ? "Failed to load user"
-            : isUserLoading
-              ? "Loading user..."
+          : isUserLoading
+            ? "Loading user..."
+            : isUserError
+              ? "Failed to load user"
               : `Hello, ${JSON.stringify(user)}!`}
       </h1>
       <p>
-        {isAssetsError
-          ? "Failed to load user assets"
-          : isAssetsLoading
-            ? "Loading user assets..."
+        {isAssetsLoading
+          ? "Loading user assets..."
+          : isAssetsError
+            ? "Failed to load user assets"
             : JSON.stringify(assets)}
       </p>
       <p>
-        {isCollectionsError
-          ? "Failed to load user collections"
-          : isCollectionsLoading
-            ? "Loading user collections..."
+        {isCollectionsLoading
+          ? "Loading user collections..."
+          : isCollectionsError
+            ? "Failed to load user collections"
             : JSON.stringify(collections)}
       </p>
     </>

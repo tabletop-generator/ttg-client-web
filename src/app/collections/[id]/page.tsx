@@ -15,10 +15,10 @@ export default function Collection({
     <>
       <h1>Hello /collections!</h1>
       <p>
-        {isError
-          ? "Failed to load collection"
-          : isLoading
-            ? "Loading collection..."
+        {isLoading
+          ? "Loading collection..."
+          : isError
+            ? "Failed to load collection"
             : JSON.stringify(collection)}
       </p>
     </>

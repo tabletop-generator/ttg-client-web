@@ -20,17 +20,17 @@ export default function Discover() {
     <>
       <h1>Hello /discover!</h1>
       <p>
-        {isAssetsError
-          ? "Failed to load assets"
-          : isAssetsLoading
-            ? "Loading assets..."
+        {isAssetsLoading
+          ? "Loading assets..."
+          : isAssetsError
+            ? "Failed to load assets"
             : JSON.stringify(assets)}
       </p>
       <p>
-        {isCollectionsError
-          ? "Failed to load collections"
-          : isCollectionsLoading
-            ? "Loading collections..."
+        {isCollectionsLoading
+          ? "Loading collections..."
+          : isCollectionsError
+            ? "Failed to load collections"
             : JSON.stringify(collections)}
       </p>
     </>
