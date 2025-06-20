@@ -9,7 +9,7 @@ import { useToast } from "@/context/toast-provider";
 
 export default function Dock() {
   const pathname = usePathname();
-  const { session } = useAuth();
+  const { session, isLoading: isAuthLoading } = useAuth();
   const { showToast } = useToast();
 
   return (
@@ -43,7 +43,11 @@ export default function Dock() {
           <span className="dock-label">Create</span>
         </Link>
 
-        {session ? (
+        {isAuthLoading ? (
+          <li>
+            <span className="loading loading-dots loading-sm"></span>
+          </li>
+        ) : session ? (
           <Link
             href="/users/me"
             className={

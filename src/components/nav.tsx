@@ -8,18 +8,18 @@ import { usePathname } from "next/navigation";
 
 export default function Nav() {
   const pathname = usePathname();
-  const { session } = useAuth();
+  const { session, isLoading: isAuthLoading } = useAuth();
   const { showToast } = useToast();
 
   return (
     <>
       <div className="navbar hidden shadow-sm sm:flex">
-        <div className="navbar-start">
+        <div className="navbar-start flex-0">
           <Link href="/" className="btn btn-ghost text-xl">
             TTG
           </Link>
         </div>
-        <nav className="navbar-end hidden justify-end sm:flex">
+        <nav className="navbar-end hidden flex-1 justify-end sm:flex">
           <ul className="menu menu-horizontal gap-4">
             <li>
               <Link
@@ -49,7 +49,11 @@ export default function Nav() {
                 Create
               </Link>
             </li>
-            {session ? (
+            {isAuthLoading ? (
+              <li>
+                <span className="loading loading-dots loading-md mx-8"></span>
+              </li>
+            ) : session ? (
               <li>
                 <Link
                   href="/users/me"
