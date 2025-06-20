@@ -1,34 +1,18 @@
 "use client";
 
 import { useAuth } from "@/context/auth-provider";
+import { useToast } from "@/context/toast-provider";
 import { CirclePlus, CircleUserRound, Compass, LogIn } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 
 export default function Nav() {
   const pathname = usePathname();
   const { session } = useAuth();
-
-  const [showToast, setShowToast] = useState(false);
-
-  function triggerToast(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
-    e.preventDefault();
-    if (!showToast) {
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 5000);
-    }
-  }
+  const { showToast } = useToast();
 
   return (
     <>
-      {showToast && (
-        <div className="toast toast-top toast-center z-50">
-          <div className="alert alert-error">
-            <span>Log in to use this feature.</span>
-          </div>
-        </div>
-      )}
       <div className="navbar hidden shadow-sm sm:flex">
         <div className="navbar-start">
           <Link href="/" className="btn btn-ghost text-xl">
@@ -52,7 +36,12 @@ export default function Nav() {
                 className={pathname === "/create" ? "menu-active" : ""}
                 onClick={(e) => {
                   if (!session) {
-                    triggerToast(e);
+                    e.preventDefault();
+                    showToast(
+                      "You must log in first.",
+                      "error",
+                      "create-login-toast",
+                    );
                   }
                 }}
               >

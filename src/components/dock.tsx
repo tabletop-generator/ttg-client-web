@@ -4,31 +4,16 @@ import { usePathname } from "next/navigation";
 import { CirclePlus, CircleUserRound, Compass, LogIn } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/context/auth-provider";
-import React, { useState } from "react";
+import React from "react";
+import { useToast } from "@/context/toast-provider";
 
 export default function Dock() {
   const pathname = usePathname();
   const { session } = useAuth();
-
-  const [showToast, setShowToast] = useState(false);
-
-  function triggerToast(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
-    e.preventDefault();
-    if (!showToast) {
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 5000);
-    }
-  }
+  const { showToast } = useToast();
 
   return (
     <>
-      {showToast && (
-        <div className="toast toast-top toast-center z-50">
-          <div className="alert alert-error">
-            <span>Log in to use this feature.</span>
-          </div>
-        </div>
-      )}
       <div className="dock sm:hidden">
         <Link
           href="/"
@@ -45,7 +30,12 @@ export default function Dock() {
           }
           onClick={(e) => {
             if (!session) {
-              triggerToast(e);
+              e.preventDefault();
+              showToast(
+                "You must log in first.",
+                "error",
+                "create-login-toast",
+              );
             }
           }}
         >

@@ -5,6 +5,7 @@ import Nav from "@/components/nav";
 import { AuthProvider } from "@/context/auth-provider";
 import { Suspense } from "react";
 import Dock from "@/components/dock";
+import { ToastProvider } from "@/context/toast-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,13 +34,15 @@ export default function RootLayout({
       >
         <Suspense>
           <AuthProvider>
-            <div className="flex min-h-screen flex-col">
-              <Nav />
-              <main className="flex flex-grow flex-col content-center">
-                {children}
-              </main>
-              <Dock />
-            </div>
+            <ToastProvider>
+              <div className="flex min-h-screen flex-col">
+                <Nav />
+                <main className="flex flex-grow flex-col content-center">
+                  {children}
+                </main>
+                <Dock />
+              </div>
+            </ToastProvider>
           </AuthProvider>
         </Suspense>
       </body>
