@@ -37,7 +37,7 @@ export default function RootLayout({
             <ToastProvider>
               <div className="flex min-h-screen flex-col">
                 <Nav />
-                <main className="flex flex-grow flex-col content-center">
+                <main className="flex grow flex-col content-center">
                   {children}
                 </main>
                 <Dock />
