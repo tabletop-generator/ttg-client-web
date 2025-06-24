@@ -3,11 +3,13 @@
 import { createClient } from "@/lib/supabase/client";
 import { KeyRound, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const supabase = createClient();
 
 export default function LoginForm() {
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
   async function login(formData: FormData) {
     const { error } = await supabase.auth.signInWithPassword({
@@ -16,7 +18,18 @@ export default function LoginForm() {
     });
 
     if (error) {
-      router.push("/error");
+      if (
+        error.code == "invalid_credentials" ||
+        error.code == "email_not_confirmed" ||
+        error.code == "user_banned" ||
+        error.code == "user_not_found" ||
+        error.code == "over_request_rate_limit"
+      ) {
+        setError(`${error.message}.`);
+      } else {
+        setError("Something went wrong");
+      }
+
       return;
     }
 
@@ -42,7 +55,12 @@ export default function LoginForm() {
         <input name="password" type="password" required />
       </label>
       <div className="validator-hint mb-3">Enter password</div>
-      <div className="card-actions justify-end">
+      <div>
+        <p className="text-error mb-4 min-h-[1.5rem] text-center">
+          {error || "\u00A0" /* non-breaking space */}
+        </p>
+      </div>
+      <div className="card-actions justify-center">
         <button className="btn btn-primary" formAction={login}>
           Log in
         </button>
