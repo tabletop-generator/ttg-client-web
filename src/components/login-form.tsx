@@ -1,9 +1,15 @@
 "use client";
 
 import { createClient } from "@/lib/supabase/client";
+import { useForm } from "react-hook-form";
 import { KeyRound, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+type Inputs = {
+  email: string;
+  password: string;
+};
 
 const supabase = createClient();
 
@@ -17,17 +23,24 @@ const exposedErrors = new Set([
 
 export default function LoginForm() {
   const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
   const [error, setError] = useState<string | null>(null);
 
-  async function login(formData: FormData) {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
+  async function onSubmit(data: Inputs) {
+    const { error: authError } = await supabase.auth.signInWithPassword({
+      email: data.email,
+      password: data.password,
     });
 
-    if (error?.code) {
+    if (authError?.code) {
       setError(
-        exposedErrors.has(error.code) ? error.message : "Something went wrong",
+        exposedErrors.has(authError.code)
+          ? authError.message + "."
+          : "Something went wrong.",
       );
       return;
     }
@@ -37,28 +50,39 @@ export default function LoginForm() {
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <label className="label mb-1 text-sm">Email</label>
-      <label className="input validator w-full">
+      <label className="input w-full">
         <span className="label">
           <Mail className="text-base-content/50 size-[1.2em]" />
         </span>
-        <input name="email" type="email" placeholder="mail@site.com" required />
+        <input
+          {...register("email", { required: "Email is required." })}
+          type="email"
+          placeholder="mail@site.com"
+        />
       </label>
-      <div className="validator-hint mb-3">Enter valid email address</div>
+      <p className="text-error mt-2 min-h-[1.5rem] text-[0.75rem]">
+        {errors.email?.message}
+      </p>
       <label className="label mb-1 text-sm">Password</label>
-      <label className="input validator w-full">
+      <label className="input w-full">
         <span className="label">
           <KeyRound className="text-base-content/50 size-[1.2em]" />
         </span>
-        <input name="password" type="password" required />
+        <input
+          {...register("password", { required: "Password is required." })}
+          type="password"
+        />
       </label>
-      <div className="validator-hint mb-3">Enter password</div>
-      <div className="text-error mb-4 min-h-[1.5rem] text-center text-[0.75rem]">
-        <span>{error || "\u00A0" /* non-breaking space */}</span>
-      </div>
+      <p className="text-error mt-2 min-h-[1.5rem] text-[0.75rem]">
+        {errors.password?.message}
+      </p>
+      <p className="text-error my-2 min-h-[1.5rem] text-center text-[0.75rem]">
+        {error}
+      </p>
       <div className="card-actions justify-center">
-        <button className="btn btn-primary" formAction={login}>
+        <button type="submit" className="btn btn-primary">
           Log in
         </button>
       </div>
