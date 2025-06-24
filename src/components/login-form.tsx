@@ -25,7 +25,7 @@ export default function LoginForm() {
         error.code == "user_not_found" ||
         error.code == "over_request_rate_limit"
       ) {
-        setError(`${error.message}.`);
+        setError(error.message);
       } else {
         setError("Something went wrong");
       }
@@ -39,26 +39,24 @@ export default function LoginForm() {
 
   return (
     <form>
+      <label className="label mb-1 text-sm">Email</label>
       <label className="input validator w-full">
         <span className="label">
           <Mail className="text-base-content/50 size-[1.2em]" />
-          Email
         </span>
         <input name="email" type="email" placeholder="mail@site.com" required />
       </label>
       <div className="validator-hint mb-3">Enter valid email address</div>
+      <label className="label mb-1 text-sm">Password</label>
       <label className="input validator w-full">
         <span className="label">
           <KeyRound className="text-base-content/50 size-[1.2em]" />
-          Password
         </span>
         <input name="password" type="password" required />
       </label>
       <div className="validator-hint mb-3">Enter password</div>
-      <div>
-        <p className="text-error mb-4 min-h-[1.5rem] text-center">
-          {error || "\u00A0" /* non-breaking space */}
-        </p>
+      <div className="text-error mb-4 min-h-[1.5rem] text-center text-[0.75rem]">
+        <span>{error || "\u00A0" /* non-breaking space */}</span>
       </div>
       <div className="card-actions justify-center">
         <button className="btn btn-primary" formAction={login}>
