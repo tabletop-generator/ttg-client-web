@@ -1,7 +1,29 @@
+"use client";
+
+import { createClient } from "@/lib/supabase/client";
 import { KeyRound, Mail } from "lucide-react";
-import { login, signup } from "@/app/login/actions";
+import { useRouter } from "next/navigation";
+
+const supabase = createClient();
 
 export default function LoginForm() {
+  const router = useRouter();
+
+  async function login(formData: FormData) {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+    });
+
+    if (error) {
+      router.push("/error");
+      return;
+    }
+
+    // Tell client to reload for immediate session awareness
+    router.push("/?justLoggedIn=1");
+  }
+
   return (
     <form>
       <label className="input validator w-full">
@@ -23,9 +45,6 @@ export default function LoginForm() {
       <div className="card-actions justify-end">
         <button className="btn btn-primary" formAction={login}>
           Log in
-        </button>
-        <button className="btn" formAction={signup}>
-          Sign up
         </button>
       </div>
     </form>
