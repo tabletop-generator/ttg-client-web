@@ -7,6 +7,14 @@ import { useState } from "react";
 
 const supabase = createClient();
 
+const exposedErrors = new Set([
+  "invalid_credentials",
+  "email_not_confirmed",
+  "user_banned",
+  "user_not_found",
+  "over_request_rate_limit",
+]);
+
 export default function LoginForm() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -17,19 +25,10 @@ export default function LoginForm() {
       password: formData.get("password") as string,
     });
 
-    if (error) {
-      if (
-        error.code == "invalid_credentials" ||
-        error.code == "email_not_confirmed" ||
-        error.code == "user_banned" ||
-        error.code == "user_not_found" ||
-        error.code == "over_request_rate_limit"
-      ) {
-        setError(error.message);
-      } else {
-        setError("Something went wrong");
-      }
-
+    if (error?.code) {
+      setError(
+        exposedErrors.has(error.code) ? error.message : "Something went wrong",
+      );
       return;
     }
 
