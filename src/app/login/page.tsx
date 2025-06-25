@@ -1,5 +1,5 @@
 import LoginForm from "@/components/login-form";
-import PasswordResetForm from "@/components/password-reset-form";
+import PasswordResetRequestForm from "@/components/password-reset-request-form";
 import SignUpForm from "@/components/signup-form";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
@@ -44,7 +44,7 @@ export default async function LoginPage() {
           aria-label="Reset password"
         />
         <div className="tab-content bg-base-100 border-base-300 p-6">
-          <PasswordResetForm />
+          <PasswordResetRequestForm />
         </div>
       </div>
     </div>

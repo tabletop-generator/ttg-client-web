@@ -11,7 +11,7 @@ type ResetPasswordInputs = {
 
 const supabase = createClient();
 
-export default function PasswordResetForm() {
+export default function PasswordResetRequestForm() {
   const {
     register,
     handleSubmit,
