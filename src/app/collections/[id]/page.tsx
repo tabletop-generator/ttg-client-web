@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useCollection } from "@/lib/use-collection";
 
-export default function Collection({
+export default function CollectionPage({
   params,
 }: {
   params: Promise<{ id: string }>;

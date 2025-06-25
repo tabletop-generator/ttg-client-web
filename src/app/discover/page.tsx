@@ -3,7 +3,7 @@
 import { useAssets } from "@/lib/use-assets";
 import { useCollections } from "@/lib/use-collections";
 
-export default function Discover() {
+export default function DiscoverPage() {
   const {
     assets,
     isError: isAssetsError,

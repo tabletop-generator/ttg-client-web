@@ -7,7 +7,11 @@ import { useCollections } from "@/lib/use-collections";
 import { useAuth } from "@/context/auth-provider";
 import LogoutButton from "@/components/logout-button";
 
-export default function User({ params }: { params: Promise<{ id: string }> }) {
+export default function UserPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = React.use(params);
 
   const { session, isLoading: isAuthLoading } = useAuth();
