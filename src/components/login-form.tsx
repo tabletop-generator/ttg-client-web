@@ -61,6 +61,7 @@ export default function LoginForm() {
           {...register("email", { required: "Email is required." })}
           type="email"
           placeholder="mail@site.com"
+          autoComplete="email"
         />
       </label>
       <p className="text-error mt-2 min-h-[1.5rem] text-[0.75rem]">
@@ -74,6 +75,7 @@ export default function LoginForm() {
         <input
           {...register("password", { required: "Password is required." })}
           type="password"
+          autoComplete="current-password"
         />
       </label>
       <p className="text-error mt-2 min-h-[1.5rem] text-[0.75rem]">
