@@ -11,8 +11,6 @@ type Inputs = {
   password: string;
 };
 
-const supabase = createClient();
-
 const exposedErrors = new Set([
   "invalid_credentials",
   "email_not_confirmed",
@@ -20,6 +18,8 @@ const exposedErrors = new Set([
   "user_not_found",
   "over_request_rate_limit",
 ]);
+
+const supabase = createClient();
 
 export default function LoginForm() {
   const router = useRouter();
