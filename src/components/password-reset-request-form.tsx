@@ -9,6 +9,13 @@ type ResetPasswordInputs = {
   email: string;
 };
 
+const exposedErrors = new Set([
+  "user_not_found",
+  "email_not_confirmed",
+  "over_email_send_rate_limit",
+  "over_request_rate_limit",
+]);
+
 const supabase = createClient();
 
 export default function PasswordResetRequestForm() {
@@ -28,10 +35,16 @@ export default function PasswordResetRequestForm() {
      * Send the user an email to get a password reset token.
      * This email contains a link which sends the user back to your application.
      */
-    const { error } = await supabase.auth.resetPasswordForEmail(data.email);
+    const { error: authError } = await supabase.auth.resetPasswordForEmail(
+      data.email,
+    );
 
-    if (error?.code) {
-      setError(error.message);
+    if (authError?.code) {
+      setError(
+        exposedErrors.has(authError.code)
+          ? authError.message
+          : "Something went wrong.",
+      );
       return;
     }
 
