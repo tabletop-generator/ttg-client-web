@@ -11,6 +11,7 @@ type Inputs = {
   password: string;
 };
 
+// See https://supabase.com/docs/guides/auth/debugging/error-codes#auth-error-codes-table
 const exposedErrors = new Set([
   "invalid_credentials",
   "email_not_confirmed",
@@ -39,7 +40,7 @@ export default function LoginForm() {
     if (authError?.code) {
       setError(
         exposedErrors.has(authError.code)
-          ? authError.message + "."
+          ? authError.message
           : "Something went wrong.",
       );
       return;
