@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useCollection } from "@/lib/use-collection";
+import { useCollection } from "@/hooks/use-collection";
 
 export default function CollectionPage({
   params,

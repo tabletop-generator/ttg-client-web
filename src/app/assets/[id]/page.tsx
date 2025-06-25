@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { useAsset } from "@/lib/use-asset";
-import { useComments } from "@/lib/use-comments";
+import { useAsset } from "@/hooks/use-asset";
+import { useComments } from "@/hooks/use-comments";
 
 export default function AssetPage({
   params,

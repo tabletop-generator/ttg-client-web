@@ -1,7 +1,7 @@
 "use client";
 
-import { useAssets } from "@/lib/use-assets";
-import { useCollections } from "@/lib/use-collections";
+import { useAssets } from "@/hooks/use-assets";
+import { useCollections } from "@/hooks/use-collections";
 
 export default function DiscoverPage() {
   const {

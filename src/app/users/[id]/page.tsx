@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { useUser } from "@/lib/use-user";
-import { useAssets } from "@/lib/use-assets";
-import { useCollections } from "@/lib/use-collections";
+import { useUser } from "@/hooks/use-user";
+import { useAssets } from "@/hooks/use-assets";
+import { useCollections } from "@/hooks/use-collections";
 import { useAuth } from "@/context/auth-provider";
 import LogoutButton from "@/components/logout-button";
 
