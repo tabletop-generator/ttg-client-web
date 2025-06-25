@@ -5,7 +5,7 @@ import { KeyRound, Mail } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-type Inputs = {
+type SignUpInputs = {
   email: string;
   password: string;
   confirmPassword: string;
@@ -31,13 +31,13 @@ export default function SignUpForm() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<SignUpInputs>();
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
 
   const password = watch("password");
 
-  async function onSubmit(data: Inputs) {
+  async function onSubmit(data: SignUpInputs) {
     setError(null);
     setMessage(null);
 

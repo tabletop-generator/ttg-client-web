@@ -6,7 +6,7 @@ import { KeyRound, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-type Inputs = {
+type LoginInputs = {
   email: string;
   password: string;
 };
@@ -28,10 +28,10 @@ export default function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<LoginInputs>();
   const [error, setError] = useState<string | null>(null);
 
-  async function onSubmit(data: Inputs) {
+  async function onSubmit(data: LoginInputs) {
     const { error: authError } = await supabase.auth.signInWithPassword({
       email: data.email,
       password: data.password,
