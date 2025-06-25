@@ -1,7 +1,4 @@
-interface SWRResError extends Error {
-  info: unknown;
-  status: number;
-}
+import type { ResponseError } from "@/types/res-error";
 
 export async function fetcher<T>([route, token]: [
   string,
@@ -19,7 +16,7 @@ export async function fetcher<T>([route, token]: [
   // we still try to parse and throw it.
   if (!res.ok) {
     // Attach extra info to the error object.
-    const error: SWRResError = Object.assign(
+    const error: ResponseError = Object.assign(
       new Error(`An error occurred while fetching the data.`),
       { info: await res.json(), status: res.status },
     );
