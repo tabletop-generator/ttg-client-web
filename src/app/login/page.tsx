@@ -1,8 +1,18 @@
 import LoginForm from "@/components/login-form";
 import ResetPasswordForm from "@/components/reset-password-form";
 import SignUpForm from "@/components/signup-form";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
-export default function Login() {
+export default async function Login() {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.auth.getUser();
+
+  if (!error && data?.user) {
+    redirect(`/users/${data.user.id}`);
+  }
+
   return (
     <div className="flex grow items-center justify-center">
       <div className="tabs tabs-lift m-6 w-96">
