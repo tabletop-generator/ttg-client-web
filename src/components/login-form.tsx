@@ -32,6 +32,8 @@ export default function LoginForm() {
   const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(data: LoginInputs) {
+    setError(null);
+
     const { error: authError } = await supabase.auth.signInWithPassword({
       email: data.email,
       password: data.password,
