@@ -13,6 +13,13 @@ type ToastContextType = {
   showToast: (message: string, type?: Toast["type"], targetId?: string) => void;
 };
 
+const alertTypeClass = {
+  info: "alert-info",
+  success: "alert-success",
+  warning: "alert-warning",
+  error: "alert-error",
+};
+
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 let toastId = 0;
@@ -43,7 +50,9 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className={`alert` + (toast.type ? ` alert-${toast.type}` : "")}
+            className={
+              `alert` + (toast.type ? ` ${alertTypeClass[toast.type]}` : "")
+            }
           >
             <span>{toast.message}</span>
           </div>
