@@ -35,7 +35,7 @@ export default function PasswordResetForm() {
         router.replace("/login");
       }
     });
-  });
+  }, [router]);
 
   async function onSubmit(data: PasswordResetInputs) {
     setLoading(true);
