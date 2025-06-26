@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { KeyRound, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useToast } from "@/context/toast-provider";
 
 type LoginInputs = {
   email: string;
@@ -24,6 +25,7 @@ const supabase = createClient();
 
 export default function LoginForm() {
   const router = useRouter();
+  const { showToast } = useToast();
   const {
     register,
     handleSubmit,
@@ -34,10 +36,11 @@ export default function LoginForm() {
   async function onSubmit(data: LoginInputs) {
     setError(null);
 
-    const { error: authError } = await supabase.auth.signInWithPassword({
-      email: data.email,
-      password: data.password,
-    });
+    const { data: authData, error: authError } =
+      await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      });
 
     if (authError?.code) {
       setError(
@@ -49,6 +52,7 @@ export default function LoginForm() {
     }
 
     // Tell client to reload for immediate session awareness
+    showToast(`Logged in as ${authData.user?.email}`, "success");
     router.push("/?justLoggedIn=1");
   }
 
