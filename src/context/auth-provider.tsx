@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, createContext, useContext } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { Session } from "@supabase/supabase-js";
 
@@ -21,6 +21,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -41,19 +42,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe();
   }, []);
 
-  // if redirected from login/signup, reload the page to sync session
+  // if redirected from login, sync session
   useEffect(() => {
     const loggedIn = searchParams.get("justLoggedIn");
-    const signedUp = searchParams.get("justSignedUp");
 
-    if (loggedIn || signedUp) {
+    if (loggedIn) {
       const url = new URL(window.location.href);
       url.searchParams.delete("justLoggedIn");
-      url.searchParams.delete("justSignedUp");
-      window.history.replaceState(null, "", url.toString());
-      window.location.reload(); // force full reload to hydrate session
+      router.replace(url.pathname);
+
+      // Immediately fetch session instead of waiting for onAuthStateChange
+      supabase.auth.getSession().then(({ data }) => {
+        setSession(data.session);
+        setIsLoading(false);
+      });
     }
-  }, [searchParams]);
+  }, [router, searchParams]);
 
   return (
     <AuthContext.Provider value={{ session, isLoading }}>
