@@ -34,10 +34,12 @@ export default function SignUpForm() {
   } = useForm<SignUpInputs>();
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const password = watch("password");
 
   async function onSubmit(data: SignUpInputs) {
+    setLoading(true);
     setError(null);
     setMessage(null);
 
@@ -52,11 +54,13 @@ export default function SignUpForm() {
           ? authError.message
           : "Something went wrong.",
       );
+      setLoading(false);
       return;
     }
 
     if (!signUpData.user?.identities?.length) {
       setError("This email is already registered.");
+      setLoading(false);
       return;
     }
 
@@ -126,7 +130,7 @@ export default function SignUpForm() {
         {error && <p className="text-error">{error}</p>}
       </div>
       <div className="card-actions justify-center">
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" disabled={loading}>
           Sign up
         </button>
       </div>

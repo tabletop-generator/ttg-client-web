@@ -26,8 +26,10 @@ export default function PasswordResetRequestForm() {
   } = useForm<PasswordResetRequestInputs>();
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function onSubmit(data: PasswordResetRequestInputs) {
+    setLoading(true);
     setError(null);
     setMessage(null);
 
@@ -48,6 +50,7 @@ export default function PasswordResetRequestForm() {
           ? authError.message
           : "Something went wrong.",
       );
+      setLoading(false);
       return;
     }
 
@@ -79,7 +82,7 @@ export default function PasswordResetRequestForm() {
         {error}
       </p>
       <div className="card-actions justify-center">
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" disabled={loading}>
           Reset password
         </button>
       </div>

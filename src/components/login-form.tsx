@@ -32,8 +32,10 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm<LoginInputs>();
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function onSubmit(data: LoginInputs) {
+    setLoading(true);
     setError(null);
 
     const { data: authData, error: authError } =
@@ -48,6 +50,7 @@ export default function LoginForm() {
           ? authError.message
           : "Something went wrong.",
       );
+      setLoading(false);
       return;
     }
 
@@ -91,7 +94,7 @@ export default function LoginForm() {
         {error}
       </p>
       <div className="card-actions justify-center">
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" disabled={loading}>
           Log in
         </button>
       </div>
