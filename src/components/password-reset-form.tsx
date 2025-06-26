@@ -1,5 +1,6 @@
 "use client";
 
+import { useToast } from "@/context/toast-provider";
 import { createClient } from "@/lib/supabase/client";
 import { KeyRound } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -14,6 +15,7 @@ type PasswordResetInputs = {
 };
 
 export default function PasswordResetForm() {
+  const { showToast } = useToast();
   const router = useRouter();
   const {
     register,
@@ -23,6 +25,7 @@ export default function PasswordResetForm() {
   } = useForm<PasswordResetInputs>();
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const password = watch("password");
 
@@ -35,6 +38,7 @@ export default function PasswordResetForm() {
   });
 
   async function onSubmit(data: PasswordResetInputs) {
+    setLoading(true);
     setError(null);
     setMessage(null);
 
@@ -44,10 +48,11 @@ export default function PasswordResetForm() {
 
     if (authError) {
       setError(authError.message);
+      setLoading(false);
       return;
     }
 
-    setMessage("Password updated successfully.");
+    showToast("Password updated successfully.", "success");
   }
 
   return message ? (
@@ -98,7 +103,7 @@ export default function PasswordResetForm() {
         {error}
       </p>
       <div className="card-actions justify-center">
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" disabled={loading}>
           Reset password
         </button>
       </div>
