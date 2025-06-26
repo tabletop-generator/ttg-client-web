@@ -5,7 +5,7 @@ import { Mail } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-type ResetPasswordInputs = {
+type PasswordResetRequestInputs = {
   email: string;
 };
 
@@ -23,11 +23,11 @@ export default function PasswordResetRequestForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ResetPasswordInputs>();
+  } = useForm<PasswordResetRequestInputs>();
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
 
-  async function onSubmit(data: ResetPasswordInputs) {
+  async function onSubmit(data: PasswordResetRequestInputs) {
     setError(null);
     setMessage(null);
 
@@ -37,6 +37,9 @@ export default function PasswordResetRequestForm() {
      */
     const { error: authError } = await supabase.auth.resetPasswordForEmail(
       data.email,
+      {
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/password-reset`,
+      },
     );
 
     if (authError?.code) {
