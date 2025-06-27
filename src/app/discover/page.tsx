@@ -35,7 +35,13 @@ export default function DiscoverPage() {
         <h2 className="text-xl font-semibold">Collections</h2>
         <div className="flex gap-4 overflow-x-auto pb-2">
           {isCollectionsLoading ? (
-            <div className="skeleton h-56 w-64 flex-shrink-0" />
+            <>
+              <div className="skeleton h-56 w-64 flex-shrink-0" />
+              <div className="skeleton h-56 w-64 flex-shrink-0" />
+              <div className="skeleton h-56 w-64 flex-shrink-0" />
+              <div className="skeleton h-56 w-64 flex-shrink-0" />
+              <div className="skeleton h-56 w-64 flex-shrink-0" />
+            </>
           ) : isCollectionsError ? (
             "Failed to load collections"
           ) : (
