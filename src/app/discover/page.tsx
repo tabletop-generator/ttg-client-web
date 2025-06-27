@@ -34,13 +34,15 @@ export default function DiscoverPage() {
       <section className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold">Collections</h2>
         <div className="flex gap-4 overflow-x-auto pb-2">
-          {isCollectionsLoading
-            ? "Loading collections..."
-            : isCollectionsError
-              ? "Failed to load collections"
-              : collections?.map((c) => (
-                  <CollectionCard key={c.collectionId} collection={c} />
-                ))}
+          {isCollectionsLoading ? (
+            <div className="skeleton h-56 w-64 flex-shrink-0" />
+          ) : isCollectionsError ? (
+            "Failed to load collections"
+          ) : (
+            collections?.map((c) => (
+              <CollectionCard key={c.collectionId} collection={c} />
+            ))
+          )}
         </div>
       </section>
 
@@ -48,11 +50,18 @@ export default function DiscoverPage() {
       <section className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold">Assets</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {isAssetsLoading
-            ? "Loading assets..."
-            : isAssetsError
-              ? "Failed to load assets"
-              : assets?.map((a) => <AssetCard key={a.assetId} asset={a} />)}
+          {isAssetsLoading ? (
+            <>
+              <div className="skeleton h-64" />
+              <div className="skeleton h-64" />
+              <div className="skeleton h-64" />
+              <div className="skeleton h-64" />
+            </>
+          ) : isAssetsError ? (
+            "Failed to load assets"
+          ) : (
+            assets?.map((a) => <AssetCard key={a.assetId} asset={a} />)
+          )}
         </div>
       </section>
     </>
