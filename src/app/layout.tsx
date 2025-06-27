@@ -37,7 +37,9 @@ export default function RootLayout({
             <ToastProvider>
               <div className="flex min-h-screen flex-col">
                 <Nav />
-                <main className="mb-10 flex grow flex-col">{children}</main>
+                <main className="mx-auto mb-12 flex w-full max-w-7xl grow flex-col gap-12 px-4 py-8">
+                  {children}
+                </main>
                 <Dock />
               </div>
             </ToastProvider>
