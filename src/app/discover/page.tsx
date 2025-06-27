@@ -2,6 +2,7 @@
 
 import AssetCard from "@/components/asset-card";
 import CollectionCard from "@/components/collection-card";
+import DiscoverSearchBar from "@/components/discover-search-bar";
 import { useAssets } from "@/hooks/use-assets";
 import { useCollections } from "@/hooks/use-collections";
 
@@ -22,12 +23,7 @@ export default function DiscoverPage() {
     <>
       {/* Search */}
       <div className="flex justify-center">
-        {/* Replace this with actual <SearchBar /> later */}
-        <input
-          type="text"
-          placeholder="Search assets..."
-          className="input input-bordered w-full max-w-xl"
-        />
+        <DiscoverSearchBar />
       </div>
 
       {/* Collection Carousel Section */}
