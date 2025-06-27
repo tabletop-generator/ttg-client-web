@@ -1,5 +1,8 @@
 "use client";
 
+import AssetCard from "@/components/asset-card";
+import CollectionCard from "@/components/collection-card";
+import DiscoverSearchBar from "@/components/discover-search-bar";
 import { useAssets } from "@/hooks/use-assets";
 import { useCollections } from "@/hooks/use-collections";
 
@@ -18,21 +21,51 @@ export default function DiscoverPage() {
 
   return (
     <>
-      <h1>Hello /discover!</h1>
-      <p>
-        {isAssetsLoading
-          ? "Loading assets..."
-          : isAssetsError
-            ? "Failed to load assets"
-            : JSON.stringify(assets)}
-      </p>
-      <p>
-        {isCollectionsLoading
-          ? "Loading collections..."
-          : isCollectionsError
-            ? "Failed to load collections"
-            : JSON.stringify(collections)}
-      </p>
+      {/* Search */}
+      <div className="flex justify-center">
+        <DiscoverSearchBar />
+      </div>
+
+      {/* Collection Carousel Section */}
+      <section className="flex flex-col gap-4">
+        <h2 className="text-xl font-semibold">Collections</h2>
+        <div className="flex gap-4 overflow-x-auto pb-2">
+          {isCollectionsLoading ? (
+            <>
+              <div className="skeleton h-56 w-64 flex-shrink-0" />
+              <div className="skeleton h-56 w-64 flex-shrink-0" />
+              <div className="skeleton h-56 w-64 flex-shrink-0" />
+              <div className="skeleton h-56 w-64 flex-shrink-0" />
+              <div className="skeleton h-56 w-64 flex-shrink-0" />
+            </>
+          ) : isCollectionsError ? (
+            "Failed to load collections"
+          ) : (
+            collections?.map((c) => (
+              <CollectionCard key={c.collectionId} collection={c} />
+            ))
+          )}
+        </div>
+      </section>
+
+      {/* Asset Grid Section */}
+      <section className="flex flex-col gap-4">
+        <h2 className="text-xl font-semibold">Assets</h2>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {isAssetsLoading ? (
+            <>
+              <div className="skeleton h-64" />
+              <div className="skeleton h-64" />
+              <div className="skeleton h-64" />
+              <div className="skeleton h-64" />
+            </>
+          ) : isAssetsError ? (
+            "Failed to load assets"
+          ) : (
+            assets?.map((a) => <AssetCard key={a.assetId} asset={a} />)
+          )}
+        </div>
+      </section>
     </>
   );
 }

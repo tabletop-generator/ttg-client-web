@@ -68,7 +68,7 @@ export default function SignUpForm() {
   }
 
   return message ? (
-    <div className="my-2 min-h-[1.5rem] text-center text-[0.75rem]">
+    <div className="my-2 min-h-6 text-center text-[0.75rem]">
       <p className="text-success">{message}</p>
     </div>
   ) : (
@@ -85,7 +85,7 @@ export default function SignUpForm() {
           autoComplete="email"
         />
       </label>
-      <p className="text-error mt-2 min-h-[1.5rem] text-[0.75rem]">
+      <p className="text-error mt-2 min-h-6 text-[0.75rem]">
         {errors.email?.message}
       </p>
       <label className="label mb-1 text-sm">Password</label>
@@ -105,7 +105,7 @@ export default function SignUpForm() {
           autoComplete="new-password"
         />
       </label>
-      <p className="text-error mt-2 min-h-[1.5rem] text-[0.75rem]">
+      <p className="text-error mt-2 min-h-6 text-[0.75rem]">
         {errors.password?.message}
       </p>
       <label className="label mb-1 text-sm">Confirm password</label>
@@ -123,10 +123,10 @@ export default function SignUpForm() {
           autoComplete="new-password"
         />
       </label>
-      <p className="text-error mt-2 min-h-[1.5rem] text-[0.75rem]">
+      <p className="text-error mt-2 min-h-6 text-[0.75rem]">
         {errors.confirmPassword?.message}
       </p>
-      <div className="my-2 min-h-[1.5rem] text-center text-[0.75rem]">
+      <div className="my-2 min-h-6 text-center text-[0.75rem]">
         {error && <p className="text-error">{error}</p>}
       </div>
       <div className="card-actions justify-center">

@@ -58,7 +58,7 @@ export default function PasswordResetRequestForm() {
   }
 
   return message ? (
-    <div className="my-2 min-h-[1.5rem] text-center text-[0.75rem]">
+    <div className="my-2 min-h-6 text-center text-[0.75rem]">
       <p className="text-success">{message}</p>
     </div>
   ) : (
@@ -75,10 +75,10 @@ export default function PasswordResetRequestForm() {
           autoComplete="email"
         />
       </label>
-      <p className="text-error mt-2 min-h-[1.5rem] text-[0.75rem]">
+      <p className="text-error mt-2 min-h-6 text-[0.75rem]">
         {errors.email?.message}
       </p>
-      <p className="text-error my-2 min-h-[1.5rem] text-center text-[0.75rem]">
+      <p className="text-error my-2 min-h-6 text-center text-[0.75rem]">
         {error}
       </p>
       <div className="card-actions justify-center">

@@ -39,7 +39,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  "/assets/{assetId}": {
+  [path: `/assets/${string}`]: {
     parameters: {
       query?: never;
       header?: never;
@@ -60,7 +60,7 @@ export interface paths {
     patch: operations["patchAssetById"];
     trace?: never;
   };
-  "/assets/{assetId}/comments": {
+  [path: `/assets/${string}/comments`]: {
     parameters: {
       query?: never;
       header?: never;
@@ -80,7 +80,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  "/assets/{assetId}/like": {
+  [path: `/assets/${string}/like`]: {
     parameters: {
       query?: never;
       header?: never;
@@ -117,7 +117,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  "/collections/{collectionId}": {
+  [path: `/collections/${string}`]: {
     parameters: {
       query?: never;
       header?: never;
@@ -138,7 +138,7 @@ export interface paths {
     patch: operations["patchCollectionById"];
     trace?: never;
   };
-  "/collections/{collectionId}/assets": {
+  [path: `/collections/${string}/assets`]: {
     parameters: {
       query?: never;
       header?: never;
@@ -157,7 +157,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  "/collections/{collectionId}/assets/remove": {
+  [path: `/collections/${string}/assets/remove`]: {
     parameters: {
       query?: never;
       header?: never;
@@ -176,7 +176,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  "/comments/{commentId}": {
+  [path: `/comments/${string}`]: {
     parameters: {
       query?: never;
       header?: never;
@@ -196,24 +196,7 @@ export interface paths {
     patch: operations["patchCommentById"];
     trace?: never;
   };
-  "/users": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /** Find or create a record for the current user */
-    post: operations["initializeUser"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/users/{userId}": {
+  [path: `/users/${string}`]: {
     parameters: {
       query?: never;
       header?: never;
@@ -390,6 +373,7 @@ export interface components {
       assetCount: number;
       /** Format: uuid */
       collectionId: string;
+      coverImageUrl: string | null;
       /** Format: date-time */
       createdAt: string;
       description: string;
@@ -1044,21 +1028,6 @@ export interface operations {
       403: components["responses"]["ErrorResponse"];
       404: components["responses"]["ErrorResponse"];
       415: components["responses"]["ErrorResponse"];
-      500: components["responses"]["ErrorResponse"];
-    };
-  };
-  initializeUser: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: components["responses"]["UserDetails"];
-      201: components["responses"]["UserDetails"];
-      401: components["responses"]["ErrorResponse"];
       500: components["responses"]["ErrorResponse"];
     };
   };
