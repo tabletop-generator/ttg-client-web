@@ -14,8 +14,8 @@ export default async function LoginPage() {
   }
 
   return (
-    <div className="flex grow items-center justify-center">
-      <div className="tabs tabs-lift m-6 w-96">
+    <section className="flex grow items-center justify-center">
+      <div className="tabs tabs-lift w-full max-w-md">
         <input
           type="radio"
           name="login-tabs"
@@ -47,6 +47,6 @@ export default async function LoginPage() {
           <PasswordResetRequestForm />
         </div>
       </div>
-    </div>
+    </section>
   );
 }
