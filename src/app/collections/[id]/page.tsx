@@ -14,7 +14,7 @@ export default function CollectionPage({
   return (
     <>
       <h1>Hello /collections!</h1>
-      <p>
+      <p className="overflow-scroll">
         {isLoading
           ? "Loading collection..."
           : isError

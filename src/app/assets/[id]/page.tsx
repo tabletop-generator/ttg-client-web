@@ -26,14 +26,14 @@ export default function AssetPage({
   return (
     <>
       <h1>Hello /assets!</h1>
-      <p>
+      <p className="overflow-scroll">
         {isAssetLoading
           ? "Loading asset..."
           : isAssetError
             ? "Failed to load asset"
             : JSON.stringify(asset)}
       </p>
-      <p>
+      <p className="overflow-scroll">
         {isCommentLoading
           ? "Loading asset comments..."
           : isCommentError

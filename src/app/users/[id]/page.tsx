@@ -37,7 +37,7 @@ export default function UserPage({
   return (
     <>
       <LogoutButton />
-      <h1>
+      <h1 className="overflow-scroll">
         {isAuthLoading
           ? "Checking session..."
           : isUserLoading
@@ -46,14 +46,14 @@ export default function UserPage({
               ? "Failed to load user"
               : `Hello, ${JSON.stringify(user)}!`}
       </h1>
-      <p>
+      <p className="overflow-scroll">
         {isAssetsLoading
           ? "Loading user assets..."
           : isAssetsError
             ? "Failed to load user assets"
             : JSON.stringify(assets)}
       </p>
-      <p>
+      <p className="overflow-scroll">
         {isCollectionsLoading
           ? "Loading user collections..."
           : isCollectionsError
