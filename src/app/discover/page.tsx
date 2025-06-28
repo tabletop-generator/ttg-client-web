@@ -42,12 +42,7 @@ export default function DiscoverPage() {
             "Failed to load collections"
           ) : (
             collections
-              ?.filter(
-                (c) =>
-                  c.assetCount > 1 &&
-                  c.name.trim().length > 1 &&
-                  c.coverImageUrl != null,
-              )
+              ?.filter((c) => c.assetCount > 1 && c.coverImageUrl != null)
               .map((c) => (
                 <CollectionCard key={c.collectionId} collection={c} />
               ))
