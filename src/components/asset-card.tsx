@@ -1,4 +1,5 @@
 import type { operations } from "@/types/schema";
+import { Heart, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,15 +20,19 @@ export default function AssetCard({
           />
         </figure>
         <div className="card-body justify-end opacity-0 transition group-hover:opacity-100">
-          <p className="card-title truncate">{asset.name}</p>
+          <p className="card-title items-end truncate">{asset.name}</p>
           <div className="flex justify-between text-sm">
             <span>
               {asset.assetType.charAt(0).toUpperCase() +
                 asset.assetType.slice(1)}
             </span>
-            <div className="flex gap-4">
-              <span>{asset.likeCount} likes</span>
-              <span>{asset.commentCount} comments</span>
+            <div className="flex items-center gap-4">
+              <span className="flex items-center gap-1">
+                <Heart size={20} /> {asset.likeCount}
+              </span>
+              <span className="flex items-center gap-1">
+                <MessageCircle size={20} /> {asset.commentCount}
+              </span>
             </div>
           </div>
         </div>
