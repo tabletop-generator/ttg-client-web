@@ -25,7 +25,7 @@ export default function CollectionCard({
           <p className="card-title flex-1 items-center justify-center truncate">
             {collection.name}
           </p>
-          <div className="card-actions absolute right-4 bottom-4 flex items-center">
+          <div className="card-actions absolute right-4 bottom-4 flex items-center gap-1">
             <Layers2 size={20} /> {collection.assetCount} assets
           </div>
         </div>
