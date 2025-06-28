@@ -10,12 +10,12 @@ export default function CollectionCard({
 }) {
   return (
     <Link href={`/collections/${collection.collectionId}`}>
-      <div className="card bg-base-100 image-full group flex h-56 w-64 flex-col overflow-hidden">
+      <div className="card image-full group flex h-56 w-64 flex-col overflow-hidden">
         {collection.coverImageUrl && (
           <figure>
             <Image
               src={collection.coverImageUrl}
-              alt={`Cover image for the collection ${collection.name}`}
+              alt={`Cover image for the collection "${collection.name}"`}
               fill
               className="!brightness-60 group-hover:!brightness-50"
             />
