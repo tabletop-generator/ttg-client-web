@@ -17,7 +17,7 @@ export default function CollectionCard({
               src={collection.coverImageUrl}
               alt={`Cover image for the collection "${collection.name}"`}
               fill
-              className="!brightness-60 group-hover:!brightness-50"
+              className="!brightness-60 transition group-hover:!brightness-50"
             />
           </figure>
         )}
