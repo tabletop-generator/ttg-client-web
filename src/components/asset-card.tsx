@@ -19,7 +19,7 @@ export default function AssetCard({
           />
         </figure>
         <div className="card-body justify-end opacity-0 transition group-hover:opacity-100">
-          <h2 className="card-title truncate">{asset.name}</h2>
+          <p className="card-title truncate">{asset.name}</p>
           <div className="flex justify-between text-sm">
             <span>
               {asset.assetType.charAt(0).toUpperCase() +
