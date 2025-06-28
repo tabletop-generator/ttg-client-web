@@ -16,10 +16,10 @@ export default function AssetCard({
             src={asset.imageUrl}
             alt={`Image for the asset "${asset.name}"`}
             fill
-            className="!brightness-100 transition group-hover:!brightness-50"
+            className="!brightness-75 transition lg:!brightness-100 lg:group-hover:!brightness-50"
           />
         </figure>
-        <div className="card-body justify-end opacity-0 transition group-hover:opacity-100">
+        <div className="card-body justify-end transition lg:opacity-0 lg:group-hover:opacity-100">
           <p className="card-title items-end truncate">{asset.name}</p>
           <div className="flex justify-between text-sm">
             <span>

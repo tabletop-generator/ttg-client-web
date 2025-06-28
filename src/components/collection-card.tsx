@@ -17,7 +17,7 @@ export default function CollectionCard({
               src={collection.coverImageUrl}
               alt={`Cover image for the collection "${collection.name}"`}
               fill
-              className="!brightness-60 transition group-hover:!brightness-50"
+              className="!brightness-60 transition lg:group-hover:!brightness-50"
             />
           </figure>
         )}
@@ -25,7 +25,7 @@ export default function CollectionCard({
           <p className="card-title flex-1 items-center justify-center truncate">
             {collection.name}
           </p>
-          <div className="card-actions absolute right-4 bottom-4 flex items-center gap-1 opacity-0 group-hover:opacity-100">
+          <div className="card-actions absolute right-4 bottom-4 flex items-center gap-1 lg:opacity-0 lg:group-hover:opacity-100">
             <Layers2 size={20} /> {collection.assetCount} assets
           </div>
         </div>
