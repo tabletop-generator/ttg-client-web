@@ -10,7 +10,7 @@ export default function CollectionCard({
 }) {
   return (
     <Link href={`/collections/${collection.collectionId}`}>
-      <div className="card image-full group flex h-56 w-64 flex-col overflow-hidden">
+      <div className="card image-full group flex h-56 w-64 overflow-hidden">
         {collection.coverImageUrl && (
           <figure>
             <Image
