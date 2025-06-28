@@ -28,7 +28,15 @@ export default function AssetCard({
             </span>
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1">
-                <Heart size={20} /> {asset.likeCount}
+                <Heart
+                  size={20}
+                  className={`transition ${
+                    asset.isLikedByCurrentUser
+                      ? "fill-current text-red-400"
+                      : ""
+                  }`}
+                />{" "}
+                {asset.likeCount}
               </span>
               <span className="flex items-center gap-1">
                 <MessageCircle size={20} /> {asset.commentCount}
