@@ -6,7 +6,7 @@ import { useComments } from "@/hooks/use-comments";
 import Image from "next/image";
 import DescriptionSection from "@/components/description-section";
 import CommentsSection from "@/components/comments-section";
-import AssetActions from "@/components/asset-actions";
+import ItemActions from "@/components/item-actions";
 import ItemHeader from "@/components/item-header";
 
 export default function AssetPage({
@@ -61,7 +61,7 @@ export default function AssetPage({
             isLoading={isAssetLoading}
           />
 
-          <AssetActions
+          <ItemActions
             isLoading={isAssetLoading}
             isLikedByCurrentUser={asset?.isLikedByCurrentUser}
             likeCount={asset?.likeCount}
