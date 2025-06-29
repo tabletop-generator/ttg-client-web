@@ -7,10 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DescriptionSection from "@/components/description-section";
 import CommentsSection from "@/components/comments-section";
-import ShareButton from "@/components/share-button";
-import CommentsButton from "@/components/comments-button";
-import LikeButton from "@/components/like-button";
-import SaveButton from "@/components/save-button";
+import AssetActions from "@/components/asset-actions";
 
 export default function AssetPage({
   params,
@@ -95,25 +92,12 @@ export default function AssetPage({
           )}
 
           {/* Action buttons */}
-          {isAssetLoading ? (
-            <div className="skeleton h-10 w-90" />
-          ) : (
-            asset && (
-              <div className="flex justify-center gap-2 sm:gap-4">
-                {/* Like */}
-                <LikeButton
-                  isLikedByCurrentUser={asset.isLikedByCurrentUser}
-                  likeCount={asset.likeCount}
-                />
-                {/* Comment count */}
-                <CommentsButton commentCount={asset.commentCount} />
-                {/* Save */}
-                <SaveButton />
-                {/* Share */}
-                <ShareButton />
-              </div>
-            )
-          )}
+          <AssetActions
+            isLoading={isAssetLoading}
+            isLikedByCurrentUser={asset?.isLikedByCurrentUser}
+            likeCount={asset?.likeCount}
+            commentCount={asset?.commentCount}
+          />
         </div>
       </section>
 
