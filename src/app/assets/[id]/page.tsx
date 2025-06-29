@@ -37,7 +37,7 @@ export default function AssetPage({
   ) : (
     <>
       {/* Image */}
-      <section className="mx-auto flex w-full justify-center">
+      <section className="flex justify-center">
         {isAssetLoading ? (
           <div className="skeleton h-64 w-256 sm:h-192" />
         ) : (
@@ -53,7 +53,7 @@ export default function AssetPage({
         )}
       </section>
       {/* Title, Metadata and Actions */}
-      <section className="mx-auto w-full">
+      <section>
         {/* Title */}
         {isAssetLoading ? (
           <div className="skeleton mx-auto mb-2 h-8 w-80 sm:mx-0 sm:w-100" />
@@ -147,8 +147,9 @@ export default function AssetPage({
           )}
         </div>
       </section>
+
       {/* Description */}
-      <section className="mx-auto w-full space-y-4">
+      <section className="space-y-4">
         <h2 className="text-xl font-semibold">Description</h2>
         {isAssetLoading ? (
           <div className="skeleton h-26" />
@@ -179,7 +180,7 @@ export default function AssetPage({
       </section>
 
       {/* Comments */}
-      <section className="mx-auto w-full space-y-4">
+      <section className="space-y-4">
         <h2 className="text-xl font-semibold" id="comments">
           Comments
         </h2>
