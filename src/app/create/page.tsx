@@ -108,7 +108,7 @@ export default function CreatePage() {
       <label className="label mb-1 text-sm">Visibility</label>
       <select
         {...register("visibility", { required: "Visibility is required." })}
-        className="select w-full"
+        className="select w-full capitalize"
       >
         {visibilityInputs.map((v) => (
           <option value={v} key={v} className="capitalize">
@@ -133,7 +133,7 @@ export default function CreatePage() {
           <label className="label mb-1 text-sm">Class</label>
           <select
             {...register("data.class", { required: "Class is required." })}
-            className="select w-full"
+            className="select w-full capitalize"
           >
             {characterClassInputs.map((v) => (
               <option value={v} key={v} className="capitalize">
@@ -147,7 +147,7 @@ export default function CreatePage() {
           <label className="label mb-1 text-sm">Race</label>
           <select
             {...register("data.race", { required: "Race is required." })}
-            className="select w-full"
+            className="select w-full capitalize"
           >
             {characterRaceInputs.map((v) => (
               <option value={v} key={v} className="capitalize">
@@ -161,7 +161,7 @@ export default function CreatePage() {
           <label className="label mb-1 text-sm">Gender</label>
           <select
             {...register("data.gender", { required: "Gender is required." })}
-            className="select w-full"
+            className="select w-full capitalize"
           >
             {characterGenderInputs.map((v) => (
               <option value={v} key={v} className="capitalize">
@@ -177,7 +177,7 @@ export default function CreatePage() {
             {...register("data.alignment", {
               required: "Alignment is required.",
             })}
-            className="select w-full"
+            className="select w-full capitalize"
           >
             {characterAlignmentInputs.map((v) => (
               <option value={v} key={v} className="capitalize">
