@@ -22,12 +22,10 @@ export default function DiscoverPage() {
   return (
     <>
       {/* Search */}
-      <div className="flex justify-center">
-        <DiscoverSearchBar />
-      </div>
+      <DiscoverSearchBar />
 
       {/* Collection Carousel Section */}
-      <section className="flex flex-col gap-4">
+      <section className="space-y-4">
         <h2 className="text-xl font-semibold">Collections</h2>
         <div className="flex gap-4 overflow-x-auto pb-2">
           {isCollectionsLoading ? (
