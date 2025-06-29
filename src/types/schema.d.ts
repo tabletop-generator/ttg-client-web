@@ -1078,26 +1078,3 @@ export interface operations {
     };
   };
 }
-export enum ApiPaths {
-  healthcheck = "/",
-  createAsset = "/assets",
-  getAssets = "/assets",
-  getAssetById = "/assets/{assetId}",
-  patchAssetById = "/assets/{assetId}",
-  deleteAssetById = "/assets/{assetId}",
-  likeAssetById = "/assets/{assetId}/like",
-  createCommentByAssetId = "/assets/{assetId}/comments",
-  getCommentsByAssetId = "/assets/{assetId}/comments",
-  patchCommentById = "/comments/{commentId}",
-  deleteCommentById = "/comments/{commentId}",
-  createCollection = "/collections",
-  getCollections = "/collections",
-  getCollectionById = "/collections/{collectionId}",
-  patchCollectionById = "/collections/{collectionId}",
-  deleteCollectionById = "/collections/{collectionId}",
-  addAssetsToCollection = "/collections/{collectionId}/assets",
-  removeAssetsFromCollection = "/collections/{collectionId}/assets/remove",
-  getUserById = "/users/{userId}",
-  getCurrentUser = "/users/me",
-  patchCurrentUser = "/users/me",
-}
