@@ -22,23 +22,22 @@ export default function AssetCard({
         <div className="card-body justify-end transition lg:opacity-0 lg:group-hover:opacity-100">
           <p className="card-title items-end truncate">{asset.name}</p>
           <div className="flex justify-between text-sm">
-            <span>
-              {asset.assetType.charAt(0).toUpperCase() +
-                asset.assetType.slice(1)}
-            </span>
+            <span className="capitalize">{asset.assetType}</span>
             <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1">
+              <span
+                className={`flex gap-1 transition ${
+                  asset.isLikedByCurrentUser ? "text-red-400" : ""
+                }`}
+              >
                 <Heart
                   size={20}
-                  className={`transition ${
-                    asset.isLikedByCurrentUser
-                      ? "fill-current text-red-400"
-                      : ""
+                  className={`${
+                    asset.isLikedByCurrentUser ? "fill-current" : ""
                   }`}
                 />{" "}
                 {asset.likeCount}
               </span>
-              <span className="flex items-center gap-1">
+              <span className="flex gap-1">
                 <MessageCircle size={20} /> {asset.commentCount}
               </span>
             </div>
