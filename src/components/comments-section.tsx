@@ -28,25 +28,23 @@ export default function CommentsSection({
 
       {isError ? (
         "Failed to load comments"
+      ) : isLoading ? (
+        <div className="space-y-1">
+          <div className="skeleton h-16" />
+          <div className="skeleton h-16" />
+        </div>
+      ) : !comments || comments.length === 0 ? (
+        <p className="p-4 text-center text-sm opacity-70">No comments yet.</p>
       ) : (
         <ul className="list border-base-300 bg-base-100 border">
-          {isLoading ? (
-            <div className="space-y-1">
-              <div className="skeleton h-16" />
-              <div className="skeleton h-16" />
-            </div>
-          ) : comments && comments.length > 0 ? (
-            comments.map((c) => (
-              <li className="list-row" key={c.commentId}>
-                <div>
-                  <div className="text-xs opacity-60">{c.displayName}</div>
-                  <div>{c.body}</div>
-                </div>
-              </li>
-            ))
-          ) : (
-            <li className="p-4 text-sm opacity-70">No comments yet.</li>
-          )}
+          {comments.map((c) => (
+            <li className="list-row" key={c.commentId}>
+              <div>
+                <div className="text-xs opacity-60">{c.displayName}</div>
+                <div>{c.body}</div>
+              </div>
+            </li>
+          ))}
         </ul>
       )}
     </section>
