@@ -4,10 +4,13 @@ import * as React from "react";
 import { useAsset } from "@/hooks/use-asset";
 import { useComments } from "@/hooks/use-comments";
 import Image from "next/image";
-import { Bookmark, Heart, MessageCircle, Share2 } from "lucide-react";
 import Link from "next/link";
 import DescriptionSection from "@/components/description-section";
 import CommentsSection from "@/components/comments-section";
+import ShareButton from "@/components/share-button";
+import CommentsButton from "@/components/comments-button";
+import LikeButton from "@/components/like-button";
+import SaveButton from "@/components/save-button";
 
 export default function AssetPage({
   params,
@@ -27,9 +30,6 @@ export default function AssetPage({
     isError: isCommentsError,
     isLoading: isCommentsLoading,
   } = useComments(id);
-
-  function handleLikeToggle() {}
-  function openSaveModal() {}
 
   return isAssetError ? (
     "Failed to load asset"
@@ -101,47 +101,16 @@ export default function AssetPage({
             asset && (
               <div className="flex justify-center gap-2 sm:gap-4">
                 {/* Like */}
-                <button
-                  onClick={() => handleLikeToggle()}
-                  className={`btn btn-ghost gap-1 transition ${
-                    asset.isLikedByCurrentUser
-                      ? "text-red-400"
-                      : "text-base-content"
-                  }`}
-                >
-                  <Heart
-                    size={20}
-                    className={
-                      asset.isLikedByCurrentUser ? "fill-current" : "opacity-80"
-                    }
-                  />
-                  <span>{asset.likeCount}</span>
-                </button>
-
+                <LikeButton
+                  isLikedByCurrentUser={asset.isLikedByCurrentUser}
+                  likeCount={asset.likeCount}
+                />
                 {/* Comment count */}
-                <Link href="#comments">
-                  <button className="btn btn-ghost gap-1">
-                    <MessageCircle size={20} className="opacity-80" />
-                    <span>{asset.commentCount}</span>
-                  </button>
-                </Link>
-
+                <CommentsButton commentCount={asset.commentCount} />
                 {/* Save */}
-                <button onClick={openSaveModal} className="btn btn-ghost gap-1">
-                  <Bookmark size={20} className="opacity-80" />
-                  <span>Save</span>
-                </button>
-
+                <SaveButton />
                 {/* Share */}
-                <button
-                  onClick={() =>
-                    navigator.clipboard.writeText(window.location.href)
-                  }
-                  className="btn btn-ghost gap-1"
-                >
-                  <Share2 size={20} className="opacity-80" />
-                  <span>Share</span>
-                </button>
+                <ShareButton />
               </div>
             )
           )}
