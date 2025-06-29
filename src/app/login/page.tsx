@@ -1,6 +1,6 @@
-import LoginForm from "@/components/login-form";
-import PasswordResetRequestForm from "@/components/password-reset-request-form";
-import SignUpForm from "@/components/signup-form";
+import { LoginForm } from "@/components/login-form";
+import { PasswordResetRequestForm } from "@/components/password-reset-request-form";
+import { SignUpForm } from "@/components/signup-form";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 

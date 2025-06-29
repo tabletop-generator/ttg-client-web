@@ -5,7 +5,7 @@ import { useUser } from "@/hooks/use-user";
 import { useAssets } from "@/hooks/use-assets";
 import { useCollections } from "@/hooks/use-collections";
 import { useAuth } from "@/context/auth-provider";
-import LogoutButton from "@/components/logout-button";
+import { LogoutButton } from "@/components/logout-button";
 
 export default function UserPage({
   params,

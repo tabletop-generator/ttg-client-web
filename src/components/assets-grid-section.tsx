@@ -1,7 +1,7 @@
-import type { operations } from "@/types/schema";
-import { Heart, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Heart, MessageCircle } from "lucide-react";
+import type { operations } from "@/types/schema";
 
 type Asset =
   operations["getAssets"]["responses"]["200"]["content"]["application/json"]["assets"][0];
@@ -51,7 +51,7 @@ function AssetCard({
   );
 }
 
-export default function AssetsGridSection({
+export function AssetsGridSection({
   assets,
   isLoading,
   isError,

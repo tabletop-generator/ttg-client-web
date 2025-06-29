@@ -1,13 +1,13 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { useAsset } from "@/hooks/use-asset";
 import { useComments } from "@/hooks/use-comments";
-import Image from "next/image";
-import DescriptionSection from "@/components/description-section";
-import CommentsSection from "@/components/comments-section";
-import ItemActions from "@/components/item-actions";
-import ItemHeader from "@/components/item-header";
+import { ItemHeader } from "@/components/item-header";
+import { ItemActions } from "@/components/item-actions";
+import { DescriptionSection } from "@/components/description-section";
+import { CommentsSection } from "@/components/comments-section";
 
 export default function AssetPage({
   params,

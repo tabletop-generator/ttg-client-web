@@ -1,11 +1,11 @@
 "use client";
 
-import { useToast } from "@/context/toast-provider";
-import { createClient } from "@/lib/supabase/client";
-import { KeyRound } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { KeyRound } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
+import { useToast } from "@/context/toast-provider";
 
 const supabase = createClient();
 
@@ -14,7 +14,7 @@ type PasswordResetInputs = {
   confirmPassword: string;
 };
 
-export default function PasswordResetForm() {
+export function PasswordResetForm() {
   const { showToast } = useToast();
   const router = useRouter();
   const {

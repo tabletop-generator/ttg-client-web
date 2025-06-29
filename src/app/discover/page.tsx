@@ -1,10 +1,10 @@
 "use client";
 
-import AssetsGridSection from "@/components/assets-grid-section";
-import CollectionsCarousel from "@/components/collections-carousel";
-import DiscoverSearchBar from "@/components/discover-search-bar";
 import { useAssets } from "@/hooks/use-assets";
 import { useCollections } from "@/hooks/use-collections";
+import { DiscoverSearchBar } from "@/components/discover-search-bar";
+import { AssetsGridSection } from "@/components/assets-grid-section";
+import { CollectionsCarousel } from "@/components/collections-carousel";
 
 export default function DiscoverPage() {
   const {

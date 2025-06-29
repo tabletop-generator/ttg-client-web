@@ -1,5 +1,5 @@
-import { MessageCircle, Heart, Bookmark, Share2 } from "lucide-react";
 import Link from "next/link";
+import { MessageCircle, Heart, Bookmark, Share2 } from "lucide-react";
 
 function LikeButton({
   isLikedByCurrentUser,
@@ -60,7 +60,7 @@ function ShareButton() {
   );
 }
 
-export default function AssetActions({
+export function ItemActions({
   isLikedByCurrentUser,
   likeCount,
   commentCount,

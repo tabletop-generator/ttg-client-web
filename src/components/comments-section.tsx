@@ -3,7 +3,7 @@ import type { operations } from "@/types/schema";
 type Comment =
   operations["getCommentsByAssetId"]["responses"]["200"]["content"]["application/json"]["comments"][0];
 
-export default function CommentsSection({
+export function CommentsSection({
   comments,
   isLoading,
   isError,

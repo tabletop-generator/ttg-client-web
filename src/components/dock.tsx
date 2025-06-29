@@ -1,13 +1,13 @@
 "use client";
 
+import React from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CirclePlus, CircleUserRound, Compass, LogIn } from "lucide-react";
-import Link from "next/link";
 import { useAuth } from "@/context/auth-provider";
-import React from "react";
 import { useToast } from "@/context/toast-provider";
 
-export default function Dock() {
+export function Dock() {
   const pathname = usePathname();
   const { session, isLoading: isAuthLoading } = useAuth();
   const { showToast } = useToast();

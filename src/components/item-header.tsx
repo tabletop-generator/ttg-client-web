@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function ItemHeader({
+export function ItemHeader({
   title,
   assetType,
   userId,

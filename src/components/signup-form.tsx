@@ -1,9 +1,9 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
-import { KeyRound, Mail } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { KeyRound, Mail } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 type SignUpInputs = {
   email: string;
@@ -25,7 +25,7 @@ const exposedErrors = new Set([
 
 const supabase = createClient();
 
-export default function SignUpForm() {
+export function SignUpForm() {
   const {
     register,
     handleSubmit,

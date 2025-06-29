@@ -1,9 +1,9 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
-import { Mail } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Mail } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 type PasswordResetRequestInputs = {
   email: string;
@@ -18,7 +18,7 @@ const exposedErrors = new Set([
 
 const supabase = createClient();
 
-export default function PasswordResetRequestForm() {
+export function PasswordResetRequestForm() {
   const {
     register,
     handleSubmit,

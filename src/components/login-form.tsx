@@ -1,10 +1,10 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { KeyRound, Mail } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import { useToast } from "@/context/toast-provider";
 
 type LoginInputs = {
@@ -23,7 +23,7 @@ const exposedErrors = new Set([
 
 const supabase = createClient();
 
-export default function LoginForm() {
+export function LoginForm() {
   const router = useRouter();
   const { showToast } = useToast();
   const {

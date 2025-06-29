@@ -1,4 +1,4 @@
-export default function DiscoverSearchBar() {
+export function DiscoverSearchBar() {
   return (
     <input
       type="text"

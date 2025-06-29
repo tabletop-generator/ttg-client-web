@@ -1,12 +1,12 @@
 "use client";
 
-import { useAuth } from "@/context/auth-provider";
-import { useToast } from "@/context/toast-provider";
-import { CirclePlus, CircleUserRound, Compass, LogIn } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CirclePlus, CircleUserRound, Compass, LogIn } from "lucide-react";
+import { useAuth } from "@/context/auth-provider";
+import { useToast } from "@/context/toast-provider";
 
-export default function Nav() {
+export function Nav() {
   const pathname = usePathname();
   const { session, isLoading: isAuthLoading } = useAuth();
   const { showToast } = useToast();

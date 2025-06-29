@@ -1,12 +1,12 @@
 "use client";
 
-import { useAuth } from "@/context/auth-provider";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { useAuth } from "@/context/auth-provider";
 
 const supabase = createClient();
 
-export default function LogoutButton() {
+export function LogoutButton() {
   const router = useRouter();
   const { session, isLoading } = useAuth();
 

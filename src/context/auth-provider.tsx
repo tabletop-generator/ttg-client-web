@@ -2,8 +2,8 @@
 
 import { useEffect, useState, createContext, useContext } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
 import type { Session } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
 
 interface AuthContextType {
   session: Session | null;

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function DescriptionSection({
+export function DescriptionSection({
   description,
   isLoading,
 }: {

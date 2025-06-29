@@ -1,6 +1,6 @@
-import { Layers2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Layers2 } from "lucide-react";
 import type { operations } from "@/types/schema";
 
 type Collection =
@@ -37,7 +37,7 @@ function CollectionCard({
   );
 }
 
-export default function CollectionsCarousel({
+export function CollectionsCarousel({
   collections,
   isLoading,
   isError,
