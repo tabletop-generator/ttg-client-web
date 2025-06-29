@@ -4,10 +4,10 @@ import * as React from "react";
 import { useAsset } from "@/hooks/use-asset";
 import { useComments } from "@/hooks/use-comments";
 import Image from "next/image";
-import Link from "next/link";
 import DescriptionSection from "@/components/description-section";
 import CommentsSection from "@/components/comments-section";
 import AssetActions from "@/components/asset-actions";
+import ItemHeader from "@/components/item-header";
 
 export default function AssetPage({
   params,
@@ -51,47 +51,16 @@ export default function AssetPage({
 
       {/* Title, Metadata and Actions */}
       <section>
-        {/* Title */}
-        {isAssetLoading ? (
-          <div className="skeleton mx-auto mb-2 h-8 w-80 sm:mx-0 sm:w-100" />
-        ) : (
-          asset && (
-            <h1 className="text-center text-2xl font-semibold sm:text-left">
-              {asset.name}
-            </h1>
-          )
-        )}
-        <div className="text-base-content/70 flex flex-col items-center justify-between gap-8 sm:flex-row sm:items-center">
-          {/* Metadata */}
-          {isAssetLoading ? (
-            <div className="skeleton h-4 w-80 sm:w-100" />
-          ) : (
-            asset && (
-              <div className="flex flex-wrap gap-2">
-                <span className="capitalize">{asset.assetType}</span>
-                <span className="opacity-50">•</span>
-                <span>
-                  by{" "}
-                  <Link
-                    href={`/users/${asset.userId}`}
-                    className="text-base-content hover:text-primary font-semibold transition-colors"
-                  >
-                    {asset.displayName}
-                  </Link>
-                </span>
-                <span className="opacity-50">•</span>
-                <time
-                  dateTime={asset.createdAt}
-                  className="tooltip tooltip-bottom"
-                  data-tip={new Date(asset.createdAt).toLocaleString()}
-                >
-                  {new Date(asset.createdAt).toLocaleDateString()}
-                </time>
-              </div>
-            )
-          )}
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between">
+          <ItemHeader
+            title={asset?.name}
+            assetType={asset?.assetType}
+            userId={asset?.userId}
+            displayName={asset?.displayName}
+            createdAt={asset?.createdAt}
+            isLoading={isAssetLoading}
+          />
 
-          {/* Action buttons */}
           <AssetActions
             isLoading={isAssetLoading}
             isLikedByCurrentUser={asset?.isLikedByCurrentUser}
