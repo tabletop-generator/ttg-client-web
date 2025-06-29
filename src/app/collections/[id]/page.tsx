@@ -2,6 +2,11 @@
 
 import * as React from "react";
 import { useCollection } from "@/hooks/use-collection";
+import { ItemHeader } from "@/components/item-header";
+import { ItemActions } from "@/components/item-actions";
+import { DescriptionSection } from "@/components/description-section";
+import { AssetsGridSection } from "@/components/assets-grid-section";
+import { CommentsSection } from "@/components/comments-section";
 
 export default function CollectionPage({
   params,
@@ -11,16 +16,35 @@ export default function CollectionPage({
   const { id } = React.use(params);
   const { collection, isError, isLoading } = useCollection(id);
 
-  return (
+  return isError ? (
+    "Failed to load collection"
+  ) : (
     <>
-      <h1>Hello /collections!</h1>
-      <p className="overflow-scroll">
-        {isLoading
-          ? "Loading collection..."
-          : isError
-            ? "Failed to load collection"
-            : JSON.stringify(collection)}
-      </p>
+      <section>
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between">
+          <ItemHeader
+            title={collection?.name}
+            userId={collection?.userId}
+            displayName={collection?.displayName}
+            createdAt={collection?.createdAt}
+            isLoading={isLoading}
+          />
+          <ItemActions isLoading={isLoading} />
+        </div>
+      </section>
+
+      <DescriptionSection
+        description={collection?.description}
+        isLoading={isLoading}
+      />
+
+      <AssetsGridSection
+        assets={collection?.assets}
+        isLoading={isLoading}
+        isError={isError}
+      />
+
+      <CommentsSection comments={undefined} isError={false} isLoading={false} />
     </>
   );
 }
