@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Bookmark, Heart, MessageCircle, Share2 } from "lucide-react";
 import Link from "next/link";
 import DescriptionSection from "@/components/description-section";
+import CommentsSection from "@/components/comments-section";
 
 export default function AssetPage({
   params,
@@ -50,6 +51,7 @@ export default function AssetPage({
           )
         )}
       </section>
+
       {/* Title, Metadata and Actions */}
       <section>
         {/* Title */}
@@ -153,38 +155,11 @@ export default function AssetPage({
       />
 
       {/* Comments */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold" id="comments">
-          Comments
-        </h2>
-        <input
-          type="text"
-          placeholder="Write a comment..."
-          className="input input-bordered w-full"
-        />
-        {isCommentsError ? (
-          "Failed to load comments"
-        ) : (
-          <ul className="list bg-base-100 border-base-300 border">
-            {isCommentsLoading ? (
-              <div className="space-y-1">
-                <div className="skeleton h-16" />
-                <div className="skeleton h-16" />
-              </div>
-            ) : (
-              comments &&
-              comments.map((c) => (
-                <li className="list-row" key={c.commentId}>
-                  <div>
-                    <div className="text-xs opacity-60">{c.displayName}</div>
-                    <div>{c.body}</div>
-                  </div>
-                </li>
-              ))
-            )}
-          </ul>
-        )}
-      </section>
+      <CommentsSection
+        comments={comments}
+        isLoading={isCommentsLoading}
+        isError={isCommentsError}
+      />
     </>
   );
 }

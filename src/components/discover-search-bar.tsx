@@ -4,6 +4,7 @@ export default function DiscoverSearchBar() {
       type="text"
       placeholder="Search assets..."
       className="input input-bordered w-full max-w-xl"
+      disabled
     />
   );
 }
