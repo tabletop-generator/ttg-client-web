@@ -8,7 +8,7 @@ export function useComments(id: string, token?: string) {
   >([`/v1/assets/${id}/comments`, token], fetcher);
 
   return {
-    comments: data,
+    comments: data?.comments,
     isLoading,
     isError: error,
   };
