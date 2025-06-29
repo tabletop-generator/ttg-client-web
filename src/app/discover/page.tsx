@@ -1,6 +1,6 @@
 "use client";
 
-import AssetCard from "@/components/asset-card";
+import AssetsGridSection from "@/components/assets-grid-section";
 import CollectionCard from "@/components/collection-card";
 import DiscoverSearchBar from "@/components/discover-search-bar";
 import { useAssets } from "@/hooks/use-assets";
@@ -51,23 +51,11 @@ export default function DiscoverPage() {
       </section>
 
       {/* Asset Grid Section */}
-      <section className="flex flex-col gap-4">
-        <h2 className="text-xl font-semibold">Assets</h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {isAssetsLoading ? (
-            <>
-              <div className="skeleton h-64" />
-              <div className="skeleton h-64" />
-              <div className="skeleton h-64" />
-              <div className="skeleton h-64" />
-            </>
-          ) : isAssetsError || !assets ? (
-            "Failed to load assets"
-          ) : (
-            assets.map((a) => <AssetCard key={a.assetId} asset={a} />)
-          )}
-        </div>
-      </section>
+      <AssetsGridSection
+        assets={assets}
+        isLoading={isAssetsLoading}
+        isError={isAssetsError}
+      />
     </>
   );
 }

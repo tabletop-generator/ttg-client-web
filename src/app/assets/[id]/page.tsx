@@ -6,6 +6,7 @@ import { useComments } from "@/hooks/use-comments";
 import Image from "next/image";
 import { Bookmark, Heart, MessageCircle, Share2 } from "lucide-react";
 import Link from "next/link";
+import DescriptionSection from "@/components/description-section";
 
 export default function AssetPage({
   params,
@@ -13,9 +14,6 @@ export default function AssetPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = React.use(params);
-
-  const [isDescriptionExpanded, setIsDescriptionExpanded] =
-    React.useState(false);
 
   const {
     asset,
@@ -149,35 +147,10 @@ export default function AssetPage({
       </section>
 
       {/* Description */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold">Description</h2>
-        {isAssetLoading ? (
-          <div className="skeleton h-26" />
-        ) : (
-          asset && (
-            <div className="collapse-arrow bg-base-100 border-base-300 collapse border">
-              <input
-                type="checkbox"
-                checked={isDescriptionExpanded}
-                onChange={() => setIsDescriptionExpanded((v) => !v)}
-              />
-              <div className="collapse-title">
-                {isDescriptionExpanded ? null : (
-                  <p className="text-base-content/80 line-clamp-3 text-base">
-                    {asset.description}
-                  </p>
-                )}
-              </div>
-              <div
-                className="collapse-content cursor-pointer"
-                onClick={() => setIsDescriptionExpanded((v) => !v)}
-              >
-                {isDescriptionExpanded ? asset.description : null}
-              </div>
-            </div>
-          )
-        )}
-      </section>
+      <DescriptionSection
+        description={asset?.description}
+        isLoading={isAssetLoading}
+      />
 
       {/* Comments */}
       <section className="space-y-4">
