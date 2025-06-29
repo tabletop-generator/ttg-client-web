@@ -73,6 +73,8 @@ export function AssetsGridSection({
           </>
         ) : isError || !assets ? (
           "Failed to load assets"
+        ) : assets.length === 0 ? (
+          <p className="text-sm opacity-70">No assets yet.</p>
         ) : (
           assets.map((a) => <AssetCard key={a.assetId} asset={a} />)
         )}

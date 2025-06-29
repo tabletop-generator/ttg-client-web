@@ -60,6 +60,8 @@ export function CollectionsCarousel({
           </>
         ) : isError || !collections ? (
           "Failed to load collections"
+        ) : collections.length === 0 ? (
+          <p className="text-sm opacity-70">No collections yet.</p>
         ) : (
           collections
             .filter((c) => c.assetCount > 1 && c.coverImageUrl != null)
