@@ -38,11 +38,11 @@ export default function DiscoverPage() {
               <div className="skeleton h-56 w-64 flex-shrink-0" />
               <div className="skeleton h-56 w-64 flex-shrink-0" />
             </>
-          ) : isCollectionsError ? (
+          ) : isCollectionsError || !collections ? (
             "Failed to load collections"
           ) : (
             collections
-              ?.filter((c) => c.assetCount > 1 && c.coverImageUrl != null)
+              .filter((c) => c.assetCount > 1 && c.coverImageUrl != null)
               .map((c) => (
                 <CollectionCard key={c.collectionId} collection={c} />
               ))
@@ -61,10 +61,10 @@ export default function DiscoverPage() {
               <div className="skeleton h-64" />
               <div className="skeleton h-64" />
             </>
-          ) : isAssetsError ? (
+          ) : isAssetsError || !assets ? (
             "Failed to load assets"
           ) : (
-            assets?.map((a) => <AssetCard key={a.assetId} asset={a} />)
+            assets.map((a) => <AssetCard key={a.assetId} asset={a} />)
           )}
         </div>
       </section>
