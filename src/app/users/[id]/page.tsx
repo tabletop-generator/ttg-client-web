@@ -6,6 +6,10 @@ import { useAssets } from "@/hooks/use-assets";
 import { useCollections } from "@/hooks/use-collections";
 import { useAuth } from "@/context/auth-provider";
 import { LogoutButton } from "@/components/logout-button";
+import { ItemHeader } from "@/components/item-header";
+import { DescriptionSection } from "@/components/description-section";
+import { AssetsGridSection } from "@/components/assets-grid-section";
+import { CollectionsCarousel } from "@/components/collections-carousel";
 
 export default function UserPage({
   params,
@@ -36,30 +40,35 @@ export default function UserPage({
 
   return (
     <>
-      <LogoutButton />
-      <h1 className="overflow-scroll">
-        {isAuthLoading
-          ? "Checking session..."
-          : isUserLoading
-            ? "Loading user..."
-            : isUserError
-              ? "Failed to load user"
-              : `Hello, ${JSON.stringify(user)}!`}
-      </h1>
-      <p className="overflow-scroll">
-        {isAssetsLoading
-          ? "Loading user assets..."
-          : isAssetsError
-            ? "Failed to load user assets"
-            : JSON.stringify(assets)}
-      </p>
-      <p className="overflow-scroll">
-        {isCollectionsLoading
-          ? "Loading user collections..."
-          : isCollectionsError
-            ? "Failed to load user collections"
-            : JSON.stringify(collections)}
-      </p>
+      {id === session?.user.id && <LogoutButton />}
+
+      {isAuthLoading ? (
+        "Checking session..."
+      ) : isUserLoading ? (
+        "Loading user info..."
+      ) : isUserError ? (
+        "Failed to load user info"
+      ) : (
+        <ItemHeader isLoading={isUserLoading} title={user?.displayName} />
+      )}
+
+      <DescriptionSection
+        isLoading={isUserLoading}
+        description={user?.bio}
+        title="bio"
+      />
+
+      <CollectionsCarousel
+        isLoading={isCollectionsLoading}
+        isError={isCollectionsError}
+        collections={collections}
+      />
+
+      <AssetsGridSection
+        isLoading={isAssetsLoading}
+        isError={isAssetsError}
+        assets={assets}
+      />
     </>
   );
 }
