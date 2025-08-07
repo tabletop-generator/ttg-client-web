@@ -34,7 +34,11 @@ export default function CollectionPage({
             createdAt={collection?.createdAt}
             isLoading={isLoading}
           />
-          <ItemActions isLoading={isLoading} />
+          <ItemActions
+            showCommentsButton={false}
+            showSaveToCollectionButton={false}
+            isLoading={isLoading}
+          />
         </div>
       </section>
 
@@ -48,8 +52,6 @@ export default function CollectionPage({
         isLoading={isLoading}
         isError={isError}
       />
-
-      <CommentsSection comments={undefined} isError={false} isLoading={false} />
     </>
   );
 }

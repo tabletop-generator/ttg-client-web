@@ -65,11 +65,15 @@ export function ItemActions({
   likeCount,
   commentCount,
   isLoading,
+  showCommentsButton = true,
+  showSaveToCollectionButton = true,
 }: {
   isLikedByCurrentUser?: boolean;
   likeCount?: number;
   commentCount?: number;
   isLoading: boolean;
+  showCommentsButton?: boolean;
+  showSaveToCollectionButton?: boolean;
 }) {
   if (isLoading) {
     return <div className="skeleton h-10 w-90" />;
@@ -81,8 +85,10 @@ export function ItemActions({
         isLikedByCurrentUser={!!isLikedByCurrentUser}
         likeCount={likeCount ?? 0}
       />
-      <CommentsButton commentCount={commentCount ?? 0} />
-      <SaveButton />
+      {showCommentsButton && (
+        <CommentsButton commentCount={commentCount ?? 0} />
+      )}
+      {showSaveToCollectionButton && <SaveButton />}
       <ShareButton />
     </div>
   );
