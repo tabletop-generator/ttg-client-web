@@ -9,7 +9,12 @@ function LikeButton({
   isLikedByCurrentUser: boolean;
   likeCount: number;
 }) {
-  function handleLikeToggle() {}
+  const { showToast } = useToast();
+
+  // TODO
+  function handleLikeToggle() {
+    showToast("Coming soon!", "warning", "coming-soon-toast");
+  }
 
   return (
     <button
@@ -38,9 +43,13 @@ function CommentsButton({ commentCount }: { commentCount: number }) {
   );
 }
 
-function SaveButton() {
+function SaveToCollectionButton() {
+  const { showToast } = useToast();
+
   // TODO
-  function openSaveModal() {}
+  function openSaveModal() {
+    showToast("Coming soon!", "warning", "coming-soon-toast");
+  }
 
   return (
     <button onClick={openSaveModal} className="btn btn-ghost gap-1">
@@ -64,7 +73,7 @@ function ShareButton() {
             window.location.search,
         );
 
-        showToast("Copied to clipboard", "info");
+        showToast("Copied to clipboard.", "info", "copied-to-clipboard-toast");
       }}
       className="btn btn-ghost gap-1"
     >
@@ -102,7 +111,7 @@ export function ItemActions({
       {showCommentsButton && (
         <CommentsButton commentCount={commentCount ?? 0} />
       )}
-      {showSaveToCollectionButton && <SaveButton />}
+      {showSaveToCollectionButton && <SaveToCollectionButton />}
       <ShareButton />
     </div>
   );
