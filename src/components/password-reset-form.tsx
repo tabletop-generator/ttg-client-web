@@ -42,9 +42,11 @@ export function PasswordResetForm() {
     setError(null);
     setMessage(null);
 
-    const { error: authError } = await supabase.auth.updateUser({
-      password: data.password,
-    });
+    const { data: authData, error: authError } = await supabase.auth.updateUser(
+      {
+        password: data.password,
+      },
+    );
 
     if (authError) {
       setError(authError.message);
@@ -52,7 +54,10 @@ export function PasswordResetForm() {
       return;
     }
 
+    // Tell client to reload for immediate session awareness
     showToast("Password updated successfully.", "success");
+    showToast(`Logged in as ${authData.user?.email}`, "success");
+    router.push("/?justLoggedIn=1");
   }
 
   return message ? (
