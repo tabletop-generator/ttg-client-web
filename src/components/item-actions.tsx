@@ -13,7 +13,7 @@ function LikeButton({
 
   // TODO
   function handleLikeToggle() {
-    showToast("Coming soon!", "warning", "coming-soon-toast");
+    showToast("Coming soon!", "warning", "like-coming-soon-toast");
   }
 
   return (
@@ -48,7 +48,7 @@ function SaveToCollectionButton() {
 
   // TODO
   function openSaveModal() {
-    showToast("Coming soon!", "warning", "coming-soon-toast");
+    showToast("Coming soon!", "warning", "save-coming-soon-toast");
   }
 
   return (
