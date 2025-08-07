@@ -6,7 +6,7 @@ import { ItemHeader } from "@/components/item-header";
 import { ItemActions } from "@/components/item-actions";
 import { DescriptionSection } from "@/components/description-section";
 import { AssetsGridSection } from "@/components/assets-grid-section";
-import { CommentsSection } from "@/components/comments-section";
+import { useAuth } from "@/context/auth-provider";
 
 export default function CollectionPage({
   params,
@@ -14,7 +14,12 @@ export default function CollectionPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = React.use(params);
-  const { collection, isError, isLoading } = useCollection(id);
+  const { session } = useAuth();
+
+  const { collection, isError, isLoading } = useCollection(
+    id,
+    session?.access_token,
+  );
 
   return isError ? (
     "Failed to load collection"
@@ -29,7 +34,11 @@ export default function CollectionPage({
             createdAt={collection?.createdAt}
             isLoading={isLoading}
           />
-          <ItemActions isLoading={isLoading} />
+          <ItemActions
+            showCommentsButton={false}
+            showSaveToCollectionButton={false}
+            isLoading={isLoading}
+          />
         </div>
       </section>
 
@@ -43,8 +52,6 @@ export default function CollectionPage({
         isLoading={isLoading}
         isError={isError}
       />
-
-      <CommentsSection comments={undefined} isError={false} isLoading={false} />
     </>
   );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { MessageCircle, Heart, Bookmark, Share2 } from "lucide-react";
+import { MessageCircle, Heart, Share2, ListPlus } from "lucide-react";
+import { useToast } from "@/context/toast-provider";
 
 function LikeButton({
   isLikedByCurrentUser,
@@ -8,7 +9,12 @@ function LikeButton({
   isLikedByCurrentUser: boolean;
   likeCount: number;
 }) {
-  function handleLikeToggle() {}
+  const { showToast } = useToast();
+
+  // TODO
+  function handleLikeToggle() {
+    showToast("Coming soon!", "warning", "coming-soon-toast");
+  }
 
   return (
     <button
@@ -37,21 +43,38 @@ function CommentsButton({ commentCount }: { commentCount: number }) {
   );
 }
 
-function SaveButton() {
-  function openSaveModal() {}
+function SaveToCollectionButton() {
+  const { showToast } = useToast();
+
+  // TODO
+  function openSaveModal() {
+    showToast("Coming soon!", "warning", "coming-soon-toast");
+  }
 
   return (
     <button onClick={openSaveModal} className="btn btn-ghost gap-1">
-      <Bookmark size={20} className="opacity-80" />
-      <span>Save</span>
+      <ListPlus size={20} className="opacity-80" />
+      <span>Save to collection</span>
     </button>
   );
 }
 
 function ShareButton() {
+  const { showToast } = useToast();
+
   return (
     <button
-      onClick={() => navigator.clipboard.writeText(window.location.href)}
+      onClick={() => {
+        // Omitting the URL fragment ('#comments')
+        // by not using window.location.href
+        navigator.clipboard.writeText(
+          window.location.origin +
+            window.location.pathname +
+            window.location.search,
+        );
+
+        showToast("Copied to clipboard.", "info", "copied-to-clipboard-toast");
+      }}
       className="btn btn-ghost gap-1"
     >
       <Share2 size={20} className="opacity-80" />
@@ -65,11 +88,15 @@ export function ItemActions({
   likeCount,
   commentCount,
   isLoading,
+  showCommentsButton = true,
+  showSaveToCollectionButton = true,
 }: {
   isLikedByCurrentUser?: boolean;
   likeCount?: number;
   commentCount?: number;
   isLoading: boolean;
+  showCommentsButton?: boolean;
+  showSaveToCollectionButton?: boolean;
 }) {
   if (isLoading) {
     return <div className="skeleton h-10 w-90" />;
@@ -81,8 +108,10 @@ export function ItemActions({
         isLikedByCurrentUser={!!isLikedByCurrentUser}
         likeCount={likeCount ?? 0}
       />
-      <CommentsButton commentCount={commentCount ?? 0} />
-      <SaveButton />
+      {showCommentsButton && (
+        <CommentsButton commentCount={commentCount ?? 0} />
+      )}
+      {showSaveToCollectionButton && <SaveToCollectionButton />}
       <ShareButton />
     </div>
   );
