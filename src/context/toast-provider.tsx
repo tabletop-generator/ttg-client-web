@@ -51,7 +51,8 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           <div
             key={toast.id}
             className={
-              `alert` + (toast.type ? ` ${alertTypeClass[toast.type]}` : "")
+              `alert justify-center` +
+              (toast.type ? ` ${alertTypeClass[toast.type]}` : "")
             }
           >
             <span>{toast.message}</span>
