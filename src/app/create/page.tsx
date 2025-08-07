@@ -217,7 +217,7 @@ export default function CreatePage() {
       </p>
       <div className="card-actions justify-center">
         <button type="submit" className="btn btn-primary" disabled={loading}>
-          {loading ? "Create" : "Loading"}
+          {loading ? "Loading" : "Create"}
         </button>
       </div>
     </form>
