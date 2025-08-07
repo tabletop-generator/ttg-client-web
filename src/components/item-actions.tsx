@@ -39,12 +39,13 @@ function CommentsButton({ commentCount }: { commentCount: number }) {
 }
 
 function SaveButton() {
+  // TODO
   function openSaveModal() {}
 
   return (
     <button onClick={openSaveModal} className="btn btn-ghost gap-1">
       <Bookmark size={20} className="opacity-80" />
-      <span>Save</span>
+      <span>Save to collection</span>
     </button>
   );
 }
