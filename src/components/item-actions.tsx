@@ -103,16 +103,20 @@ export function ItemActions({
   }
 
   return (
-    <div className="flex justify-center gap-2 sm:gap-4">
-      <LikeButton
-        isLikedByCurrentUser={!!isLikedByCurrentUser}
-        likeCount={likeCount ?? 0}
-      />
-      {showCommentsButton && (
-        <CommentsButton commentCount={commentCount ?? 0} />
-      )}
-      {showSaveToCollectionButton && <SaveToCollectionButton />}
-      <ShareButton />
+    <div className="flex flex-wrap gap-2 sm:gap-4">
+      <div className="flex w-full justify-center gap-2 sm:w-auto sm:gap-4">
+        <LikeButton
+          isLikedByCurrentUser={!!isLikedByCurrentUser}
+          likeCount={likeCount ?? 0}
+        />
+        {showCommentsButton && (
+          <CommentsButton commentCount={commentCount ?? 0} />
+        )}
+      </div>
+      <div className="flex w-full justify-center gap-2 sm:w-auto sm:gap-4">
+        {showSaveToCollectionButton && <SaveToCollectionButton />}
+        <ShareButton />
+      </div>
     </div>
   );
 }
