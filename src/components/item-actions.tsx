@@ -103,7 +103,7 @@ export function ItemActions({
   }
 
   return (
-    <div className="flex flex-wrap gap-2 sm:gap-4">
+    <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
       <div className="flex w-full justify-center gap-2 sm:w-auto sm:gap-4">
         <LikeButton
           isLikedByCurrentUser={!!isLikedByCurrentUser}
