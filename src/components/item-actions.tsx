@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MessageCircle, Heart, Bookmark, Share2 } from "lucide-react";
+import { MessageCircle, Heart, Share2, ListPlus } from "lucide-react";
 import { useToast } from "@/context/toast-provider";
 
 function LikeButton({
@@ -44,7 +44,7 @@ function SaveButton() {
 
   return (
     <button onClick={openSaveModal} className="btn btn-ghost gap-1">
-      <Bookmark size={20} className="opacity-80" />
+      <ListPlus size={20} className="opacity-80" />
       <span>Save to collection</span>
     </button>
   );
