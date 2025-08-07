@@ -8,6 +8,7 @@ import { ItemHeader } from "@/components/item-header";
 import { ItemActions } from "@/components/item-actions";
 import { DescriptionSection } from "@/components/description-section";
 import { CommentsSection } from "@/components/comments-section";
+import { useAuth } from "@/context/auth-provider";
 
 export default function AssetPage({
   params,
@@ -15,18 +16,19 @@ export default function AssetPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = React.use(params);
+  const { session } = useAuth();
 
   const {
     asset,
     isError: isAssetError,
     isLoading: isAssetLoading,
-  } = useAsset(id);
+  } = useAsset(id, session?.access_token);
 
   const {
     comments,
     isError: isCommentsError,
     isLoading: isCommentsLoading,
-  } = useComments(id);
+  } = useComments(id, session?.access_token);
 
   return isAssetError ? (
     "Failed to load asset"
