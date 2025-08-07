@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MessageCircle, Heart, Bookmark, Share2 } from "lucide-react";
+import { useToast } from "@/context/toast-provider";
 
 function LikeButton({
   isLikedByCurrentUser,
@@ -49,9 +50,21 @@ function SaveButton() {
 }
 
 function ShareButton() {
+  const { showToast } = useToast();
+
   return (
     <button
-      onClick={() => navigator.clipboard.writeText(window.location.href)}
+      onClick={() => {
+        // Omitting the URL fragment ('#comments')
+        // by not using window.location.href
+        navigator.clipboard.writeText(
+          window.location.origin +
+            window.location.pathname +
+            window.location.search,
+        );
+
+        showToast("Copied to clipboard", "info");
+      }}
       className="btn btn-ghost gap-1"
     >
       <Share2 size={20} className="opacity-80" />
